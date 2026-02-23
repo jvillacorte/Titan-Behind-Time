@@ -1,59 +1,37 @@
-// Alarm Note - Step Event
-
-// Scroll upward
 y -= scroll_speed;
 
-// Get manager reference with safety check
-if (!instance_exists(obj_rhythm_manager)) {
-    exit;
-}
+if (!instance_exists(obj_rhythm_manager)) exit;
+var m = instance_find(obj_rhythm_manager, 0);
+if (m == noone) exit;
 
-var manager = instance_find(obj_rhythm_manager, 0);
+var in_zone = (y >= m.hit_zone_y - m.hit_zone_range) && (y <= m.hit_zone_y + m.hit_zone_range);
 
-if (manager == noone) {
-    exit;
-}
+if (keyboard_check_pressed(ord("Z")) && in_zone && !is_toggled)
+{
+    var diff = abs(y - m.hit_zone_y);
 
-// Check if in hit zone
-var in_hit_zone = (y >= manager.hit_zone_y - manager.hit_zone_range) && 
-                  (y <= manager.hit_zone_y + manager.hit_zone_range);
-
-// Check for Z key press
-if (keyboard_check_pressed(ord("Z")) && in_hit_zone && !is_toggled) {
-    // Calculate timing accuracy
-    var timing_diff = abs(y - manager.hit_zone_y);
-    
-    if (timing_diff <= manager.perfect_threshold) {
-        // PERFECT!
-        manager.player_score += 100;
-        manager.combo++;
-        manager.show_feedback("PERFECT!", c_yellow);
-        
-        // Play sound if exists
+    if (diff <= m.perfect_threshold) 
+	{
+        m.player_score += 100;
+        m.combo += 1;
+        m.show_feedback("PERFECT!", c_yellow);
         audio_play_sound(snd_toggle_hit, 1, false);
-        
-    } else if (timing_diff <= manager.good_threshold) {
-        // GOOD
-        manager.player_score += 50;
-        manager.combo++;
-        manager.show_feedback("GOOD", c_lime);
-        
-        // Play sound if exists
+        is_toggled = true;
+    } else if (diff <= m.good_threshold)
+	{
+        m.player_score += 50;
+        m.combo += 1;
+        m.show_feedback("GOOD", c_lime);
         audio_play_sound(snd_toggle_hit, 1, false);
+        is_toggled = true;
     }
-    
-    // Toggle the alarm
-    is_toggled = true;
 }
 
-// Check if missed (passed hit zone without toggling)
-if (y < manager.hit_zone_y - manager.hit_zone_range && !is_toggled && !missed) {
-    manager.combo = 0;
-    manager.show_feedback("MISS", c_red);
+if (y < m.hit_zone_y - m.hit_zone_range && !is_toggled && !missed) 
+{
+    m.combo = 0;
+    m.show_feedback("MISS", c_red);
     missed = true;
 }
 
-// Destroy if off screen
-if (y < -sprite_height) {
-    instance_destroy();
-}
+if (y < -sprite_height) instance_destroy();
