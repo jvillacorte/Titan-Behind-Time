@@ -31,6 +31,7 @@
     {"id":{"name":"obj_player_platformer","path":"objects/obj_player_platformer/obj_player_platformer.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_rhythm_manager","path":"objects/obj_rhythm_manager/obj_rhythm_manager.yy",},},
+    {"id":{"name":"Object6","path":"objects/Object6/Object6.yy",},},
     {"id":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
