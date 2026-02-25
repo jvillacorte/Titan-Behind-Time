@@ -1,13 +1,13 @@
 {
   "$GMRoom":"v1",
-  "%Name":"Room2",
+  "%Name":"Platformer_Fighter",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_20DFDD74","path":"rooms/Room2/Room2.yy",},
-    {"name":"inst_37FE8EFD","path":"rooms/Room2/Room2.yy",},
+    {"name":"inst_20DFDD74","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
+    {"name":"inst_37FE8EFD","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -22,7 +22,7 @@
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":true,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_bluebackground","path":"sprites/spr_bluebackground/spr_bluebackground.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":true,"x":0,"y":0,},
   ],
-  "name":"Room2",
+  "name":"Platformer_Fighter",
   "parent":{
     "name":"Rooms",
     "path":"folders/Rooms.yy",
