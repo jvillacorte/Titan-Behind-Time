@@ -15,6 +15,10 @@ hit_zone_range = 30;
 perfect_threshold = 15;
 good_threshold = 30;
 
+perfect_hit = 0;
+good_hit = 0;
+miss_hit = 0;
+
 feedback_text = "";
 feedback_color = c_white;
 feedback_timer = 0;
