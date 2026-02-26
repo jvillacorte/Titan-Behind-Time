@@ -1,12 +1,12 @@
 {
   "$GMRoom":"v1",
-  "%Name":"Room1",
+  "%Name":"RpgTest",
   "creationCodeFile":"",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_25408FF3","path":"rooms/Room1/Room1.yy",},
+    {"name":"inst_25408FF3","path":"rooms/RpgTest/RpgTest.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -81,7 +81,7 @@
         ],"TileDataFormat":1,},"tilesetId":{"name":"TileSet1","path":"tilesets/TileSet1/TileSet1.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.05,"htiled":true,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_lava","path":"sprites/spr_lava/spr_lava.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.05,"vtiled":true,"x":0,"y":0,},
   ],
-  "name":"Room1",
+  "name":"RpgTest",
   "parent":{
     "name":"Rooms",
     "path":"folders/Rooms.yy",
