@@ -73,9 +73,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"Platformer_Fighter","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},},
     {"roomId":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
     {"roomId":{"name":"RpgTest","path":"rooms/RpgTest/RpgTest.yy",},},
-    {"roomId":{"name":"Platformer_Fighter","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},},
     {"roomId":{"name":"DrivingSq","path":"rooms/DrivingSq/DrivingSq.yy",},},
   ],
   "templateType":"game",
