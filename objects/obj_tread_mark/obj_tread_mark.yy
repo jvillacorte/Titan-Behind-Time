@@ -1,9 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"Object6",
-  "eventList":[],
+  "%Name":"obj_tread_mark",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"Object6",
+  "name":"obj_tread_mark",
   "overriddenProperties":[],
   "parent":{
     "name":"RPG Starter Pack",

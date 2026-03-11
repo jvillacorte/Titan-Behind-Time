@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"RoadTile",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"RoadTile",
+  "out_columns":17,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"RPG Starter Pack",
+    "path":"RPG Starter Pack.yyp",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"roads2W_Sheet",
+    "path":"sprites/roads2W_Sheet/roads2W_Sheet.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":16,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":16,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":288,
+}
