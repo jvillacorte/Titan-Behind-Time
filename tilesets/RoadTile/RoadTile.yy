@@ -18,8 +18,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"roads2W_Sheet",
-    "path":"sprites/roads2W_Sheet/roads2W_Sheet.yy",
+    "name":"roads2W",
+    "path":"sprites/roads2W/roads2W.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{
@@ -28,10 +28,10 @@
   },
   "tileAnimationFrames":[],
   "tileAnimationSpeed":15.0,
-  "tileHeight":16,
+  "tileHeight":32,
   "tilehsep":0,
   "tilevsep":0,
-  "tileWidth":16,
+  "tileWidth":32,
   "tilexoff":0,
   "tileyoff":0,
   "tile_count":288,
