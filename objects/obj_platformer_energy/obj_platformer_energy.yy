@@ -1,9 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"Object6",
-  "eventList":[],
+  "%Name":"obj_platformer_energy",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"Object6",
+  "name":"obj_platformer_energy",
   "overriddenProperties":[],
   "parent":{
     "name":"RPG Starter Pack",
@@ -27,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_enemy_idle",
+    "path":"sprites/spr_enemy_idle/spr_enemy_idle.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
