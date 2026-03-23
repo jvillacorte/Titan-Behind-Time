@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"temp_spr_delete_soon",
-    "path":"sprites/temp_spr_delete_soon/temp_spr_delete_soon.yy",
+    "name":"spr_platform_idle",
+    "path":"sprites/spr_platform_idle/spr_platform_idle.yy",
   },
   "spriteMaskId":null,
   "visible":true,

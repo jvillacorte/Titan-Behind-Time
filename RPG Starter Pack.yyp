@@ -53,6 +53,8 @@
     {"id":{"name":"spr_jobApplication","path":"sprites/spr_jobApplication/spr_jobApplication.yy",},},
     {"id":{"name":"spr_lava","path":"sprites/spr_lava/spr_lava.yy",},},
     {"id":{"name":"spr_npc1","path":"sprites/spr_npc1/spr_npc1.yy",},},
+    {"id":{"name":"spr_platform_idle","path":"sprites/spr_platform_idle/spr_platform_idle.yy",},},
+    {"id":{"name":"spr_platform_run","path":"sprites/spr_platform_run/spr_platform_run.yy",},},
     {"id":{"name":"spr_player_idle_down","path":"sprites/spr_player_idle_down/spr_player_idle_down.yy",},},
     {"id":{"name":"spr_player_idle_left","path":"sprites/spr_player_idle_left/spr_player_idle_left.yy",},},
     {"id":{"name":"spr_player_idle_right","path":"sprites/spr_player_idle_right/spr_player_idle_right.yy",},},
