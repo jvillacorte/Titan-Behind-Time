@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Driving Sequence Assets",
+    "path":"folders/Driving Sequence Assets.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

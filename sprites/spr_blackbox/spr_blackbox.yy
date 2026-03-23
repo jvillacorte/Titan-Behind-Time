@@ -44,8 +44,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Platformer Assets",
+    "path":"folders/Platformer Assets.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -9,8 +9,8 @@
   "name":"obj_car",
   "overriddenProperties":[],
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Driving Sequence Assets",
+    "path":"folders/Driving Sequence Assets.yy",
   },
   "parentObjectId":null,
   "persistent":false,

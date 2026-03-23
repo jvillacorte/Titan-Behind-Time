@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_toggle_hit",
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Rhythm Assets",
+    "path":"folders/Rhythm Assets.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -6,8 +6,8 @@
   "name":"obj_block",
   "overriddenProperties":[],
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Platformer Assets",
+    "path":"folders/Platformer Assets.yy",
   },
   "parentObjectId":null,
   "persistent":false,

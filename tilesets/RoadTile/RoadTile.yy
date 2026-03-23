@@ -12,8 +12,8 @@
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Driving Sequence Assets",
+    "path":"folders/Driving Sequence Assets.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
