@@ -14,6 +14,9 @@ if instance_exists(obj_pauser)
 	yspd = 0;
 }
 
+//Delete Player
+
+
 //collisions
 if place_meeting(x + xspd, y, obj_wall) == true
 {
@@ -48,10 +51,17 @@ sprite_index = sprite[face];
 
 
 //animate
-if xspd == 0 && yspd == 0
-{
-image_index = 0;
-}
+
+if (xspd == 0 && yspd == 0 && face == DOWN)  { sprite_index = sprite[DOWN_IDLE]; }
+if (xspd == 0 && yspd == 0 && face == UP)    { sprite_index = sprite[UP_IDLE];}
+if (xspd == 0 && yspd == 0 && face == LEFT)  { sprite_index = sprite[LEFT_IDLE];}
+if (xspd == 0 && yspd == 0 && face == RIGHT) { sprite_index = sprite[RIGHT_IDLE];}
+
+
+//if xspd == 0 && yspd == 0 
+//{
+//image_index = 0;
+//}
 
 //depth
 depth = -bbox_bottom;

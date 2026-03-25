@@ -1,3 +1,7 @@
+prev_x = x;
+prev_y = y;
+real_speed = 0;
+
 spawn_x = x;
 spawn_y = y;
 

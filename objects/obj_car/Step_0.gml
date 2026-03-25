@@ -1,3 +1,4 @@
+// RESET (keep as-is)
 if (keyboard_check_pressed(ord("Q")))
 {
     x = spawn_x;
@@ -9,10 +10,10 @@ if (keyboard_check_pressed(ord("Q")))
     exit;
 }
 
-var key_w = keyboard_check(ord("W"));
-var key_s = keyboard_check(ord("S"));
-var key_a = keyboard_check(ord("A"));
-var key_d = keyboard_check(ord("D"));
+var key_w = keyboard_check(ord("W")) || keyboard_check(vk_up);
+var key_s = keyboard_check(ord("S")) || keyboard_check(vk_down);
+var key_a = keyboard_check(ord("A")) || keyboard_check(vk_left);
+var key_d = keyboard_check(ord("D")) || keyboard_check(vk_right);
 
 if (key_w)
 {
@@ -70,8 +71,22 @@ if (spd < 0)
 
 direction += steer_angle * speed_factor * reverse_mult;
 
-x += lengthdir_x(spd, direction);
-y += lengthdir_y(spd, direction);
+var xspd = lengthdir_x(spd, direction);
+var yspd = lengthdir_y(spd, direction);
+
+//collisions
+if place_meeting(x + xspd, y, obj_wall) == true
+{
+    xspd = 0;
+}
+
+if place_meeting(x, y + yspd, obj_wall) == true
+{
+    yspd = 0;
+}
+
+x += xspd;
+y += yspd;
 
 image_angle = direction + sprite_angle_offset;
 
@@ -103,3 +118,7 @@ else
 {
     tread_timer = 0;
 }
+
+real_speed = point_distance(x, y, prev_x, prev_y);
+prev_x = x;
+prev_y = y;
