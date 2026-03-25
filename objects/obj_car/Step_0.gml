@@ -1,4 +1,3 @@
-// RESET (keep as-is)
 if (keyboard_check_pressed(ord("Q")))
 {
     x = spawn_x;
@@ -122,3 +121,5 @@ else
 real_speed = point_distance(x, y, prev_x, prev_y);
 prev_x = x;
 prev_y = y;
+
+scr_room_change_if_touching(obj_room_changer);
