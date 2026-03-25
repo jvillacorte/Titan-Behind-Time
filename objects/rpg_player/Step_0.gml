@@ -7,6 +7,28 @@ down_key = keyboard_check(vk_down) || keyboard_check(ord("S"));
 xspd = (right_key - left_key) * move_spd;
 yspd = (down_key - up_key) * move_spd;
 
+//pause
+if instance_exists(obj_pauser)
+{
+	xspd = 0;
+	yspd = 0;
+}
+
+//collisions
+if place_meeting(x + xspd, y, obj_wall) == true
+{
+xspd = 0;	
+}
+
+if place_meeting(x, y + yspd, obj_wall) == true
+{
+yspd = 0;	
+}
+
+//move player
+x += xspd;
+y += yspd;
+
 //set sprite
 mask_index = sprite[DOWN];
 
@@ -24,22 +46,12 @@ if xspd == 0
 
 sprite_index = sprite[face];
 
-//collisions
-if place_meeting(x + xspd, y, obj_wall) == true
-{
-xspd = 0;	
-}
-
-if place_meeting(x, y + yspd, obj_wall) == true
-{
-yspd = 0;	
-}
-
-x += xspd;
-y += yspd;
 
 //animate
 if xspd == 0 && yspd == 0
 {
-image_index = 0;	
+image_index = 0;
 }
+
+//depth
+depth = -bbox_bottom;
