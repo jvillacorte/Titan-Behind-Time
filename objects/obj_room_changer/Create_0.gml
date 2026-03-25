@@ -1,1 +1,0 @@
-target_room = Platformer_Fighter;
