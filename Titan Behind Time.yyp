@@ -39,22 +39,15 @@
     {"id":{"name":"obj_dresser","path":"objects/obj_dresser/obj_dresser.yy",},},
     {"id":{"name":"obj_house","path":"objects/obj_house/obj_house.yy",},},
     {"id":{"name":"obj_jobapp","path":"objects/obj_jobapp/obj_jobapp.yy",},},
-<<<<<<< Kev
-    {"id":{"name":"obj_platformer_energy","path":"objects/obj_platformer_energy/obj_platformer_energy.yy",},},
-=======
     {"id":{"name":"obj_pauser","path":"objects/obj_pauser/obj_pauser.yy",},},
->>>>>>> main
     {"id":{"name":"obj_player_platformer","path":"objects/obj_player_platformer/obj_player_platformer.yy",},},
     {"id":{"name":"obj_rhythm_manager","path":"objects/obj_rhythm_manager/obj_rhythm_manager.yy",},},
-<<<<<<< Kev
-=======
     {"id":{"name":"obj_room_changer","path":"objects/obj_room_changer/obj_room_changer.yy",},},
     {"id":{"name":"obj_room_switcher","path":"objects/obj_room_switcher/obj_room_switcher.yy",},},
     {"id":{"name":"obj_tread_mark","path":"objects/obj_tread_mark/obj_tread_mark.yy",},},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"obj_warp_block","path":"objects/obj_warp_block/obj_warp_block.yy",},},
     {"id":{"name":"obj_warp","path":"objects/obj_warp/obj_warp.yy",},},
->>>>>>> main
     {"id":{"name":"PhoneBG","path":"objects/PhoneBG/PhoneBG.yy",},},
     {"id":{"name":"rpg_player","path":"objects/rpg_player/rpg_player.yy",},},
     {"id":{"name":"DrivingSq","path":"rooms/DrivingSq/DrivingSq.yy",},},
@@ -80,26 +73,13 @@
     {"id":{"name":"spr_button_heavy","path":"sprites/spr_button_heavy/spr_button_heavy.yy",},},
     {"id":{"name":"spr_button_light","path":"sprites/spr_button_light/spr_button_light.yy",},},
     {"id":{"name":"spr_button_run","path":"sprites/spr_button_run/spr_button_run.yy",},},
-<<<<<<< Kev
-    {"id":{"name":"spr_enemy_idle","path":"sprites/spr_enemy_idle/spr_enemy_idle.yy",},},
-    {"id":{"name":"spr_enemy_punch","path":"sprites/spr_enemy_punch/spr_enemy_punch.yy",},},
-    {"id":{"name":"spr_enemy_walk","path":"sprites/spr_enemy_walk/spr_enemy_walk.yy",},},
-=======
     {"id":{"name":"spr_drawer","path":"sprites/spr_drawer/spr_drawer.yy",},},
     {"id":{"name":"spr_dresser","path":"sprites/spr_dresser/spr_dresser.yy",},},
->>>>>>> main
     {"id":{"name":"spr_enemy1","path":"sprites/spr_enemy1/spr_enemy1.yy",},},
     {"id":{"name":"spr_enemy2","path":"sprites/spr_enemy2/spr_enemy2.yy",},},
     {"id":{"name":"spr_house_tiles","path":"sprites/spr_house_tiles/spr_house_tiles.yy",},},
     {"id":{"name":"spr_jobApplication","path":"sprites/spr_jobApplication/spr_jobApplication.yy",},},
-<<<<<<< Kev
-    {"id":{"name":"spr_lava","path":"sprites/spr_lava/spr_lava.yy",},},
-    {"id":{"name":"spr_npc1","path":"sprites/spr_npc1/spr_npc1.yy",},},
-    {"id":{"name":"spr_platform_idle","path":"sprites/spr_platform_idle/spr_platform_idle.yy",},},
-    {"id":{"name":"spr_platform_run","path":"sprites/spr_platform_run/spr_platform_run.yy",},},
-=======
     {"id":{"name":"spr_player_down","path":"sprites/spr_player_down/spr_player_down.yy",},},
->>>>>>> main
     {"id":{"name":"spr_player_idle_down","path":"sprites/spr_player_idle_down/spr_player_idle_down.yy",},},
     {"id":{"name":"spr_player_idle_left","path":"sprites/spr_player_idle_left/spr_player_idle_left.yy",},},
     {"id":{"name":"spr_player_idle_right","path":"sprites/spr_player_idle_right/spr_player_idle_right.yy",},},
