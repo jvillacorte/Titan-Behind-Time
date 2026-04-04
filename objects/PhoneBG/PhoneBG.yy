@@ -8,8 +8,8 @@
   "name":"PhoneBG",
   "overriddenProperties":[],
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Rhythm Assets",
+    "path":"folders/Rhythm Assets.yy",
   },
   "parentObjectId":null,
   "persistent":false,

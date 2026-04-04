@@ -9,11 +9,13 @@
     {"name":"inst_20DFDD74","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
     {"name":"inst_37FE8EFD","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
     {"name":"inst_45198A19","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
+    {"name":"inst_794A17DB","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},
   ],
   "isDnd":false,
   "layers":[
     {"$GMRInstanceLayer":"","%Name":"Instances_2","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_37FE8EFD","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_37FE8EFD","objectId":{"name":"obj_player_platformer","path":"objects/obj_player_platformer/obj_player_platformer.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":32.0,"y":448.0,},
+        {"$GMRInstance":"v4","%Name":"inst_794A17DB","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_794A17DB","objectId":{"name":"obj_room_switcher","path":"objects/obj_room_switcher/obj_room_switcher.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1248.0,"y":480.0,},
       ],"layers":[],"name":"Instances_2","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_45198A19","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_45198A19","objectId":{"name":"obj_jobapp","path":"objects/obj_jobapp/obj_jobapp.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":0.10998736,"scaleY":0.09375,"x":192.0,"y":864.0,},

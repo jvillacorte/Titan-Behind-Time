@@ -45,8 +45,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"Platformer Assets",
+    "path":"folders/Platformer Assets.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
