@@ -79,6 +79,7 @@
     {"id":{"name":"spr_enemy2","path":"sprites/spr_enemy2/spr_enemy2.yy",},},
     {"id":{"name":"spr_house_tiles","path":"sprites/spr_house_tiles/spr_house_tiles.yy",},},
     {"id":{"name":"spr_jobApplication","path":"sprites/spr_jobApplication/spr_jobApplication.yy",},},
+    {"id":{"name":"spr_platform_idle","path":"sprites/spr_platform_idle/spr_platform_idle.yy",},},
     {"id":{"name":"spr_player_down","path":"sprites/spr_player_down/spr_player_down.yy",},},
     {"id":{"name":"spr_player_idle_down","path":"sprites/spr_player_idle_down/spr_player_idle_down.yy",},},
     {"id":{"name":"spr_player_idle_left","path":"sprites/spr_player_idle_left/spr_player_idle_left.yy",},},
