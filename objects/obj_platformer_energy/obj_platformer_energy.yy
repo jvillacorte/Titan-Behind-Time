@@ -1,16 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_player_platformer",
+  "%Name":"obj_platformer_energy",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_player_platformer",
+  "name":"obj_platformer_energy",
   "overriddenProperties":[],
   "parent":{
-    "name":"Platformer Assets",
-    "path":"folders/Platformer Assets.yy",
+    "name":"RPG Starter Pack",
+    "path":"RPG Starter Pack.yyp",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_platform_idle",
-    "path":"sprites/spr_platform_idle/spr_platform_idle.yy",
+    "name":"spr_enemy_idle",
+    "path":"sprites/spr_enemy_idle/spr_enemy_idle.yy",
   },
   "spriteMaskId":null,
   "visible":true,
