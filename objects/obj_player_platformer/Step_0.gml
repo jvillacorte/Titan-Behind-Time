@@ -9,7 +9,7 @@ xspeed = move * walkspeed;
 if (move != 0) 
 {
     // Currently moving (A or D is held)
-    sprite_index = spr_platform_run; 
+    sprite_index = spr_platform_walk; 
     image_speed = animwalkspeed; 
 	image_xscale = move;
 } 
@@ -55,7 +55,7 @@ y += yspeed;
 if (mouse_check_button_pressed(mb_left)) 
 {
     // Create the bullet
-    var bullet = instance_create_layer(x, y+20, "Instances", obj_jobapp);
+    var bullet = instance_create_layer(x, y-50, "Instances", obj_jobapp);
 	bullet.speed = 50;
     show_debug_message("Bullet created! ID: " + string(bullet));
     // Set direction based on where the player is facing (image_xscale)

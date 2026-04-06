@@ -27,7 +27,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.3.217",
+    "IDEVersion":"2024.14.4.222",
   },
   "name":"RPG Starter Pack",
   "resources":[
@@ -80,6 +80,7 @@
     {"id":{"name":"spr_house_tiles","path":"sprites/spr_house_tiles/spr_house_tiles.yy",},},
     {"id":{"name":"spr_jobApplication","path":"sprites/spr_jobApplication/spr_jobApplication.yy",},},
     {"id":{"name":"spr_platform_idle","path":"sprites/spr_platform_idle/spr_platform_idle.yy",},},
+    {"id":{"name":"spr_platform_walk","path":"sprites/spr_platform_walk/spr_platform_walk.yy",},},
     {"id":{"name":"spr_player_down","path":"sprites/spr_player_down/spr_player_down.yy",},},
     {"id":{"name":"spr_player_idle_down","path":"sprites/spr_player_idle_down/spr_player_idle_down.yy",},},
     {"id":{"name":"spr_player_idle_left","path":"sprites/spr_player_idle_left/spr_player_idle_left.yy",},},
@@ -108,11 +109,11 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"Platformer_Fighter","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},},
     {"roomId":{"name":"rm_bedroom","path":"rooms/rm_bedroom/rm_bedroom.yy",},},
     {"roomId":{"name":"rm_living_room","path":"rooms/rm_living_room/rm_living_room.yy",},},
     {"roomId":{"name":"DrivingSq","path":"rooms/DrivingSq/DrivingSq.yy",},},
     {"roomId":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
-    {"roomId":{"name":"Platformer_Fighter","path":"rooms/Platformer_Fighter/Platformer_Fighter.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
