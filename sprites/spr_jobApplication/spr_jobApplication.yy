@@ -1,7 +1,7 @@
 {
   "$GMSprite":"v2",
   "%Name":"spr_jobApplication",
-  "bboxMode":0,
+  "bboxMode":1,
   "bbox_bottom":23,
   "bbox_left":0,
   "bbox_right":18,
