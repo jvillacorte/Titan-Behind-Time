@@ -4,5 +4,4 @@ grv = 0.3;
 walkspeed = 3;     
 animwalkspeed = 1;
 dir = 1;
-hp = 1; 
-is_dead = false;
+

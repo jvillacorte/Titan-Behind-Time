@@ -5,3 +5,7 @@ walkspeed = 10;
 jumpheight = -7;
 animwalkspeed = 1;
 animidlespeed = 1;
+can_shoot = true; 
+reload_time = 180;
+TITLECARD = false;
+is_knocked_back = false; // Temporarily locks player controls when hit

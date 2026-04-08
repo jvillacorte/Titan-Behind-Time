@@ -1,5 +1,5 @@
 //checks for enemies
-var _enemy_hit = instance_place(x + hsp, y + vsp, obj_enemy);
+var _enemy_hit = instance_place(x + xspeed, y + yspeed, obj_enemy_parent);
 
 if (_enemy_hit != noone) 
 {
@@ -14,13 +14,13 @@ if (_enemy_hit != noone)
 }
 
 //wall check
-if (place_meeting(x + hsp, y + vsp, obj_block)) 
+if (place_meeting(x + xspeed, y + yspeed, obj_block)) 
 {
     // Move 1 pixel at a time until flush with the wall
-    while (!place_meeting(x + sign(hsp), y + sign(vsp), obj_block)) 
+    while (!place_meeting(x + sign(xspeed), y + sign(yspeed), obj_block)) 
     {
-        x += sign(hsp);
-        y += sign(vsp);
+        x += sign(xspeed);
+        y += sign(yspeed);
     }
     
     instance_destroy();
@@ -28,6 +28,6 @@ if (place_meeting(x + hsp, y + vsp, obj_block))
 else 
 {
     // normal bullet movement
-    x += hsp;
-    y += vsp;
+    x += xspeed;
+    y += yspeed;
 }

@@ -4,7 +4,12 @@ key_jump = keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_space);
 
 // Calculate Movement
 var move = key_right - key_left;
-xspeed = move * walkspeed;
+
+// ONLY let the player walk if they aren't currently being knocked back
+if (!is_knocked_back) 
+{
+    xspeed = move * walkspeed;
+}
 // sprite mirror logic: + idle logic
 if (move != 0) 
 {
@@ -51,17 +56,46 @@ if (place_meeting(x, y + yspeed,obj_block))
 y += yspeed;
 
 
-// Bullet / Attack Logic Here:
-if (mouse_check_button_pressed(mb_left)) 
+// Bullet Logic:
+if (mouse_check_button_pressed(mb_left)) && (can_shoot)
 {
-    // Create the bullet
     var bullet = instance_create_layer(x, y-50, "Instances", obj_jobapp);
-	bullet.speed = 50;
-    show_debug_message("Bullet created! ID: " + string(bullet));
-    // Set direction based on where the player is facing (image_xscale)
-    if (image_xscale > 0) bullet.direction = 0;   // Right
-    else bullet.direction = 180;                  // Left
+    bullet.speed = 50;
+    
+    if (image_xscale > 0) bullet.direction = 0;   
+    else bullet.direction = 180;                  
+
+    // START THE RELOAD TIMER
+    can_shoot = false;
+    alarm[0] = reload_time; 
 }
 
+// Enemy Collision / Knockback
+var _enemy = instance_place(x, y, obj_enemy_parent);
+
+if (_enemy != noone) && (!TITLECARD)
+{
+    TITLECARD = true;
+    alarm[1] = 90; 
+    
+    is_knocked_back = true;
+    alarm[2] = 15; // 0.25 seconds of being stunned in the air
+    
+    yspeed = -5;
+    
+    if (x < _enemy.x) 
+    {
+        xspeed = -6;
+    } 
+    else 
+    {
+        xspeed = 6; 
+    }
+}
+
+// Visual Feedback: Make the player flash slightly transparent while invincible
+if (TITLECARD) {
+    image_alpha = 0.5;
+}
 
 

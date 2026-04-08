@@ -39,6 +39,7 @@
     {"id":{"name":"obj_dresser","path":"objects/obj_dresser/obj_dresser.yy",},},
     {"id":{"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",},},
     {"id":{"name":"obj_enemy1_platformer","path":"objects/obj_enemy1_platformer/obj_enemy1_platformer.yy",},},
+    {"id":{"name":"obj_enemy2_platformer","path":"objects/obj_enemy2_platformer/obj_enemy2_platformer.yy",},},
     {"id":{"name":"obj_house","path":"objects/obj_house/obj_house.yy",},},
     {"id":{"name":"obj_jobapp","path":"objects/obj_jobapp/obj_jobapp.yy",},},
     {"id":{"name":"obj_pauser","path":"objects/obj_pauser/obj_pauser.yy",},},
