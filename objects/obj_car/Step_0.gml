@@ -5,7 +5,10 @@ if (keyboard_check_pressed(ord("Q")))
     direction = spawn_dir;
     spd = 0;
     steer_angle = 0;
-    image_angle = direction + sprite_angle_offset;
+
+    // IMPORTANT: keep unrotated for collisions
+    image_angle = 0;
+
     exit;
 }
 
@@ -14,35 +17,20 @@ var key_s = keyboard_check(ord("S")) || keyboard_check(vk_down);
 var key_a = keyboard_check(ord("A")) || keyboard_check(vk_left);
 var key_d = keyboard_check(ord("D")) || keyboard_check(vk_right);
 
-if (key_w)
-{
-    spd += accel_rate;
-}
+if (key_w) spd += accel_rate;
 
 if (key_s)
 {
-    if (spd > 0)
-    {
-        spd -= brake_rate;
-    }
-    else
-    {
-        spd -= reverse_rate;
-    }
+    if (spd > 0) spd -= brake_rate;
+    else         spd -= reverse_rate;
 }
 
 spd = clamp(spd, max_rev, max_fwd);
 
 if (!key_w && !key_s)
 {
-    if (abs(spd) < rolling_friction)
-    {
-        spd = 0;
-    }
-    else
-    {
-        spd -= sign(spd) * rolling_friction;
-    }
+    if (abs(spd) < rolling_friction) spd = 0;
+    else spd -= sign(spd) * rolling_friction;
 }
 
 if (spd != 0)
@@ -61,34 +49,24 @@ if (steer_input == 0)
 }
 
 var speed_factor = clamp(abs(spd) / max_fwd, 0, 1);
-var reverse_mult = 1;
-
-if (spd < 0)
-{
-    reverse_mult = -1;
-}
+var reverse_mult = (spd < 0) ? -1 : 1;
 
 direction += steer_angle * speed_factor * reverse_mult;
 
 var xspd = lengthdir_x(spd, direction);
 var yspd = lengthdir_y(spd, direction);
 
-//collisions
-if place_meeting(x + xspd, y, obj_wall) == true
-{
-    xspd = 0;
-}
-
-if place_meeting(x, y + yspd, obj_wall) == true
-{
-    yspd = 0;
-}
+// collisions (same as your version)
+if (place_meeting(x + xspd, y, obj_wall)) xspd = 0;
+if (place_meeting(x, y + yspd, obj_wall)) yspd = 0;
 
 x += xspd;
 y += yspd;
 
-image_angle = direction + sprite_angle_offset;
+// IMPORTANT: keep unrotated for collisions
+image_angle = 0;
 
+// tread marks (unchanged)
 if (abs(spd) > tread_min_speed)
 {
     tread_timer += 1;

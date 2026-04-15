@@ -1,7 +1,7 @@
 {
   "$GMSprite":"v2",
   "%Name":"compact_red",
-  "bboxMode":0,
+  "bboxMode":2,
   "bbox_bottom":57,
   "bbox_left":0,
   "bbox_right":25,
