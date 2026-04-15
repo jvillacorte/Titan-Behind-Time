@@ -1,17 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_room_changer",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_road_edge",
+  "eventList":[],
   "managed":true,
-  "name":"obj_room_changer",
+  "name":"obj_road_edge",
   "overriddenProperties":[],
   "parent":{
     "name":"Driving Sequence Assets",
     "path":"folders/Driving Sequence Assets.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_wall",
+    "path":"objects/obj_wall/obj_wall.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,9 +31,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite41",
-    "path":"sprites/Sprite41/Sprite41.yy",
+    "name":"Sprite48",
+    "path":"sprites/Sprite48/Sprite48.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

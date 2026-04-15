@@ -57,11 +57,19 @@ var xspd = lengthdir_x(spd, direction);
 var yspd = lengthdir_y(spd, direction);
 
 // collisions (same as your version)
-if (place_meeting(x + xspd, y, obj_wall)) xspd = 0;
-if (place_meeting(x, y + yspd, obj_wall)) yspd = 0;
+if (place_meeting(x + xspd, y, obj_road_edge)) xspd = 0;
+if (place_meeting(x, y + yspd, obj_road_edge)) yspd = 0;
 
 x += xspd;
 y += yspd;
+
+var gen = instance_find(obj_highway_gen, 0);
+if (instance_exists(gen) && gen.run_done && y <= 0)
+{
+    y = 0;
+    spd = 0;
+    steer_angle = 0;
+}
 
 // IMPORTANT: keep unrotated for collisions
 image_angle = 0;

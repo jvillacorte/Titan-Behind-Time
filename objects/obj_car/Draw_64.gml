@@ -3,7 +3,7 @@ var px_per_step = real_speed;
 var pixels_per_foot = 8;
 var mph = (px_per_step / pixels_per_foot) * (3600 / 5280);
 
-draw_set_color(c_white);
+draw_set_color(c_black);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 
