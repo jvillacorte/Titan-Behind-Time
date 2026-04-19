@@ -13,7 +13,6 @@ if (!is_knocked_back)
 // sprite mirror logic: + idle logic
 if (move != 0) 
 {
-    // Currently moving (A or D is held)
     sprite_index = spr_platform_walk; 
     image_speed = animwalkspeed; 
 	image_xscale = move;
@@ -28,15 +27,15 @@ else
 // gravity
 yspeed += gravitystrength;
 
-if (place_meeting(x, y + 1, obj_block)) && (key_jump) // note to future: replcae obj_block with whatever the "base" will be
+if (place_meeting(x, y + 1, obj_block_parent)) && (key_jump)
 {
     yspeed = jumpheight;
 }
 
 // Horizontal Collision
-if (place_meeting(x + xspeed, y, obj_block))
+if (place_meeting(x + xspeed, y, obj_block_parent))
 {
-    while (!place_meeting(x + sign(xspeed), y, obj_block))
+    while (!place_meeting(x + sign(xspeed), y, obj_block_parent))
     {
         x = x + sign(xspeed);
     }
@@ -45,9 +44,9 @@ if (place_meeting(x + xspeed, y, obj_block))
 x = x + xspeed;
 
 // Vertical Collision
-if (place_meeting(x, y + yspeed,obj_block))
+if (place_meeting(x, y + yspeed,obj_block_parent))
 {
-    while (!place_meeting(x, y + sign(yspeed),obj_block))
+    while (!place_meeting(x, y + sign(yspeed),obj_block_parent))
     {
         y = y + sign(yspeed);
     }
@@ -73,13 +72,19 @@ if (mouse_check_button_pressed(mb_left)) && (can_shoot)
 // Enemy Collision / Knockback
 var _enemy = instance_place(x, y, obj_enemy_parent);
 
-if (_enemy != noone) && (!TITLECARD)
+if (_enemy != noone) && (!TITLECARD) && (_enemy.is_dead == false) && (_enemy != obj_meteor)
 {
+    playerhp -= 1;
+    if (playerhp <= 0) 
+    {
+        instance_destroy();
+        // logic to move to gameover ui HERE
+    }
     TITLECARD = true;
     alarm[1] = 90; 
     
     is_knocked_back = true;
-    alarm[2] = 15; // 0.25 seconds of being stunned in the air
+    alarm[2] = 15; 
     
     yspeed = -5;
     
@@ -89,7 +94,7 @@ if (_enemy != noone) && (!TITLECARD)
     } 
     else 
     {
-        xspeed = 6; 
+        xspeed = 6;
     }
 }
 

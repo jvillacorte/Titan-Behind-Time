@@ -32,9 +32,9 @@ else // if alive
 	
 
     // Ledge Detection
-    if (place_meeting(x, y + 1, obj_block)) 
+    if (place_meeting(x, y + 1, obj_block_parent)) 
     {
-        if (!place_meeting(x + (dir * 15), y + 1, obj_block)) 
+        if (!place_meeting(x + (dir * 15), y + 1, obj_block_parent)) 
         {
             dir *= -1;                
             xspeed = dir * walkspeed; 
@@ -42,9 +42,9 @@ else // if alive
     }
 
     // Horizontal Collision
-    if (place_meeting(x + xspeed, y, obj_block)) 
+    if (place_meeting(x + xspeed, y, obj_block_parent)) 
     {
-        while (!place_meeting(x + sign(xspeed), y, obj_block)) 
+        while (!place_meeting(x + sign(xspeed), y, obj_block_parent)) 
         {
             x += sign(xspeed);
         }
@@ -54,9 +54,9 @@ else // if alive
     x += xspeed; 
 
     // Vertical Collision
-    if (place_meeting(x, y + yspeed, obj_block)) 
+    if (place_meeting(x, y + yspeed, obj_block_parent)) 
     {
-        while (!place_meeting(x, y + sign(yspeed), obj_block)) 
+        while (!place_meeting(x, y + sign(yspeed), obj_block_parent)) 
         {
             y += sign(yspeed);
         }

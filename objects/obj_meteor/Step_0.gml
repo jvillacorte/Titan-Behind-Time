@@ -1,8 +1,8 @@
 
-if (place_meeting(x, y, obj_block)) 
+if (place_meeting(x, y, obj_block_parent)) 
 {
     
-    if (instance_exists(obj_enemy2)) obj_enemy2.is_attacking = false;
+    if (instance_exists(obj_enemy2_platformer)) obj_enemy2_platformer.is_attacking = false;
     
     instance_destroy(); 
 }

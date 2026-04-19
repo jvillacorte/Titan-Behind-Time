@@ -21,8 +21,8 @@ else // if alive
 { yspeed += grv;
 
 // Vertical Collision
-if (place_meeting(x, y + yspeed, obj_block)) {
-    while (!place_meeting(x, y + sign(yspeed), obj_block)) {
+if (place_meeting(x, y + yspeed, obj_block_parent)) {
+    while (!place_meeting(x, y + sign(yspeed), obj_block_parent)) {
         y += sign(yspeed);
     }
     yspeed = 0;
@@ -30,15 +30,15 @@ if (place_meeting(x, y + yspeed, obj_block)) {
 y += yspeed;
 
 // Face Player
-if (instance_exists(obj_player)) {
-    var _target_dir = sign(obj_player.x - x);
+if (instance_exists(obj_player_platformer)) {
+    var _target_dir = sign(obj_player_platformer.x - x);
     if (_target_dir != 0) image_xscale = _target_dir;
 }
 
 // Animation Swap
 if (is_attacking) {
-    sprite_index = spr_enemy2_attack;
+    sprite_index = spr_enemy2attack;
 } else {
-    sprite_index = spr_enemy2_idle;
+    sprite_index = spr_enemy2;
 }
 }

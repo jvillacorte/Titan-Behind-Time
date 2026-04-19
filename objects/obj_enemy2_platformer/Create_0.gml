@@ -6,4 +6,4 @@ is_attacking = false;
 
 // Attack Timer
 attack_cooldown = 7 * 60; // 7 seconds (assuming 60fps)
-alarm[0] = attack_cooldown;
+alarm[0] = 1;

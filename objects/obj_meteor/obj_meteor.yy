@@ -34,7 +34,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_meteor",
+    "path":"sprites/spr_meteor/spr_meteor.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
