@@ -1,38 +1,44 @@
-yspeed += grv;
-xspeed = dir * walkspeed;
-
-// 2. Ledge Detection
-if (place_meeting(x, y + 1, obj_block)) 
+// if we are dead:
+if (hp <= 0) && (!is_dead) 
 {
-   
-    if (!place_meeting(x + (dir * 15), y + 1, obj_block)) 
-    {
-        dir *= -1;                // Flip the direction
-        xspeed = dir * walkspeed; 
-    }
+    is_dead = true; 
+    yspeed = -5; 
 }
 
-// 3. Horizontal Collision
-if (place_meeting(x + xspeed, y, obj_block)) 
+
+if (is_dead) 
 {
-    while (!place_meeting(x + sign(xspeed), y, obj_block)) 
-    {
-        x += sign(xspeed);
-    }
     
-    dir *= -1;
-    xspeed = 0;
-}
-x += xspeed; 
-
-
-// 4. Vertical Collision 
-if (place_meeting(x, y + yspeed, obj_block)) 
-{
-    while (!place_meeting(x, y + sign(yspeed), obj_block)) 
+    yspeed += grv;
+    y += yspeed;
+    
+    if (y > room_height + 100) 
     {
+        instance_destroy();
+    }
+}
+else // if alive
+{ yspeed += grv;
+
+// Vertical Collision
+if (place_meeting(x, y + yspeed, obj_block)) {
+    while (!place_meeting(x, y + sign(yspeed), obj_block)) {
         y += sign(yspeed);
     }
     yspeed = 0;
 }
 y += yspeed;
+
+// Face Player
+if (instance_exists(obj_player)) {
+    var _target_dir = sign(obj_player.x - x);
+    if (_target_dir != 0) image_xscale = _target_dir;
+}
+
+// Animation Swap
+if (is_attacking) {
+    sprite_index = spr_enemy2_attack;
+} else {
+    sprite_index = spr_enemy2_idle;
+}
+}

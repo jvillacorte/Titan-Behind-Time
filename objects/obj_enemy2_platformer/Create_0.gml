@@ -1,7 +1,9 @@
-xspeed = 0;     // NOTE: all variables changable later   
-yspeed = 0;  
-grv = 0.3;
-walkspeed = 3;     
-animwalkspeed = 1;
-dir = 1;
+hp = 1; 
+is_dead = false;
+grv = 0.5;
+yspeed = 0;
+is_attacking = false;
 
+// Attack Timer
+attack_cooldown = 7 * 60; // 7 seconds (assuming 60fps)
+alarm[0] = attack_cooldown;

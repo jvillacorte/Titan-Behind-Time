@@ -22,7 +22,14 @@ if (is_dead)
 else // if alive
 {
     yspeed += grv; 
+	
+	if (instance_exists(obj_player_platformer)) 
+    {
+        //tracks the player
+        dir = sign(obj_player_platformer.x - x);
+    }
     xspeed = dir * walkspeed;
+	
 
     // Ledge Detection
     if (place_meeting(x, y + 1, obj_block)) 

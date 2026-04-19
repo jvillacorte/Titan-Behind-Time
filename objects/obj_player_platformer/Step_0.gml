@@ -60,7 +60,7 @@ y += yspeed;
 if (mouse_check_button_pressed(mb_left)) && (can_shoot)
 {
     var bullet = instance_create_layer(x, y-50, "Instances", obj_jobapp);
-    bullet.speed = 50;
+    bullet.speed = 25;
     
     if (image_xscale > 0) bullet.direction = 0;   
     else bullet.direction = 180;                  
@@ -95,7 +95,9 @@ if (_enemy != noone) && (!TITLECARD)
 
 // Visual Feedback: Make the player flash slightly transparent while invincible
 if (TITLECARD) {
-    image_alpha = 0.5;
+    // This flips alpha between 0 and 1 every few frames
+    image_alpha = (current_time % 100 < 50) ? 0 : 1; 
+} else {
+    image_alpha = 1; // Ensure they are solid when not invincible
 }
-
 
