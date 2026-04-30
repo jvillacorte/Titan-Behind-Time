@@ -14,10 +14,10 @@ if (_enemy_hit != noone)
 }
 
 //wall check
-if (place_meeting(x + xspeed, y + yspeed, obj_block)) 
+if (place_meeting(x + xspeed, y + yspeed, obj_block_parent)) 
 {
     // Move 1 pixel at a time until flush with the wall
-    while (!place_meeting(x + sign(xspeed), y + sign(yspeed), obj_block)) 
+    while (!place_meeting(x + sign(xspeed), y + sign(yspeed), obj_block_parent)) 
     {
         x += sign(xspeed);
         y += sign(yspeed);

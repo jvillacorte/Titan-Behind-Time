@@ -5,6 +5,18 @@ key_jump = keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_space);
 // Calculate Movement
 var move = key_right - key_left;
 
+if (is_dead) 
+{
+    xspeed = 0;
+    yspeed = 0;
+    
+    if (keyboard_check_pressed(vk_space)) 
+    {
+        game_end(); // Or room_goto(rm_main_menu);
+    }
+    
+    exit; // This stops the rest of the movement code from running!
+}
 // ONLY let the player walk if they aren't currently being knocked back
 if (!is_knocked_back) 
 {
@@ -75,26 +87,24 @@ var _enemy = instance_place(x, y, obj_enemy_parent);
 if (_enemy != noone) && (!TITLECARD) && (_enemy.is_dead == false) && (_enemy != obj_meteor)
 {
     playerhp -= 1;
+    
     if (playerhp <= 0) 
     {
-        instance_destroy();
-        // logic to move to gameover ui HERE
+        is_dead = true; 
+        xspeed = 0;
+        yspeed = 0;
     }
-    TITLECARD = true;
-    alarm[1] = 90; 
-    
-    is_knocked_back = true;
-    alarm[2] = 15; 
-    
-    yspeed = -5;
-    
-    if (x < _enemy.x) 
-    {
-        xspeed = -6;
-    } 
     else 
     {
-        xspeed = 6;
+        
+        TITLECARD = true;
+        alarm[1] = 90; 
+        
+        is_knocked_back = true;
+        alarm[2] = 15; 
+        
+        yspeed = -5;
+        if (x < _enemy.x) xspeed = -6; else xspeed = 6;
     }
 }
 

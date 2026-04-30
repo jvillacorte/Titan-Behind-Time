@@ -1,1 +1,1 @@
-target_room = Platformer_Fighter;
+target_room = rm_Platformer_Fighter;

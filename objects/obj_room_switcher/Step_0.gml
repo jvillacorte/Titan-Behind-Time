@@ -7,7 +7,7 @@ if (keyboard_check_pressed(ord("1")))
 
 if (keyboard_check_pressed(ord("2")))
 {
-    room_goto(Platformer_Fighter);
+    room_goto(rm_Platformer_Fighter);
 }
 
 if (keyboard_check_pressed(ord("3")))

@@ -9,4 +9,5 @@ animidlespeed = 1;
 can_shoot = true; 
 reload_time = 60;
 TITLECARD = false;
+is_dead	= false
 is_knocked_back = false; // Temporarily locks player controls when hit
