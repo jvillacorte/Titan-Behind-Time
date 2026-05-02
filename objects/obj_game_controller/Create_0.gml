@@ -1,7 +1,16 @@
 global.game_paused = false;
 global.pause_menu_inst = noone;
 
-global.win_sizes = [[1280, 720], [1600, 900], [1920, 1080]];
+global.win_sizes =
+[
+    [1024, 576],
+    [1152, 648],
+    [1280, 720],
+    [1366, 768],
+    [1600, 900],
+    [1920, 1080],
+    [2560, 1440]
+];
 
 if (!variable_global_exists("win_size_index")) global.win_size_index = 0;
 if (!variable_global_exists("fullscreen"))     global.fullscreen = window_get_fullscreen();
