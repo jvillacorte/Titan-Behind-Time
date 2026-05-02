@@ -143,11 +143,11 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rm_Platformer_Fighter","path":"rooms/rm_Platformer_Fighter/rm_Platformer_Fighter.yy",},},
     {"roomId":{"name":"rm_title_screen","path":"rooms/rm_title_screen/rm_title_screen.yy",},},
     {"roomId":{"name":"rm_bedroom","path":"rooms/rm_bedroom/rm_bedroom.yy",},},
     {"roomId":{"name":"rm_living_room","path":"rooms/rm_living_room/rm_living_room.yy",},},
     {"roomId":{"name":"DrivingSq","path":"rooms/DrivingSq/DrivingSq.yy",},},
+    {"roomId":{"name":"rm_Platformer_Fighter","path":"rooms/rm_Platformer_Fighter/rm_Platformer_Fighter.yy",},},
     {"roomId":{"name":"rm_victory_room","path":"rooms/rm_victory_room/rm_victory_room.yy",},},
     {"roomId":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
   ],
