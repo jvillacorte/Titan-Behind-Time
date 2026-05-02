@@ -14,31 +14,39 @@ function get_op_length()
     switch (menu_level)
     {
         case 0:
-            return 4; // Resume / Settings / Quit to Main / Quit Desktop
-        case 1:
-            return 3; // Graphics / Audio / Back
-        case 2:
-            return 4; // graphics options
-        case 3:
-            return 4; // audio options
+            return scr_save_exists() ? 6 : 5;
+        case 1: return 3;
+        case 2: return 4;
+        case 3: return 4;
     }
-
     return 0;
 }
 
 function refresh_options()
 {
+    var has_save = scr_save_exists();
+
     option[0, 0] = "Resume";
     option[0, 1] = "Settings";
-    option[0, 2] = "Quit to Main Menu";
-    option[0, 3] = "Quit to Desktop";
+    option[0, 2] = "Save Game";
+
+    if (has_save)
+    {
+        option[0, 3] = "Delete Save";
+        option[0, 4] = "Quit to Main Menu";
+        option[0, 5] = "Quit to Desktop";
+    }
+    else
+    {
+        option[0, 3] = "Quit to Main Menu";
+        option[0, 4] = "Quit to Desktop";
+    }
 
     option[1, 0] = "Graphics Settings";
     option[1, 1] = "Audio Settings";
     option[1, 2] = "Back";
 
     global.win_size_index = clamp(global.win_size_index, 0, array_length(global.win_sizes) - 1);
-
     var w = global.win_sizes[global.win_size_index][0];
     var h = global.win_sizes[global.win_size_index][1];
 

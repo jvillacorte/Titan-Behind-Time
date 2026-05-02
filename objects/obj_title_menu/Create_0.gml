@@ -1,3 +1,13 @@
+// hide persistent RPG player on title screen
+if (instance_exists(rpg_player))
+{
+    with (rpg_player)
+    {
+        active = false;
+        visible = false;
+    }
+}
+
 width = 90;
 height = 70;
 
@@ -14,44 +24,54 @@ function get_op_length()
     switch (menu_level)
     {
         case 0:
-            return 3; // Start / Settings / Quit
+            return scr_save_exists() ? 4 : 3;
         case 1:
-            return 3; // Graphics / Audio / Back
+            return 3;
         case 2:
-            return 4; // graphics options
+            return 4;
         case 3:
-            return 4; // audio options
+            return 4;
     }
-
     return 0;
 }
 
-// fallback defaults (prevents crashes if controller wasn't created yet)
-if (!variable_global_exists("win_sizes"))
-{
-    global.win_sizes = [[1280, 720], [1600, 900], [1920, 1080]];
-}
-
-if (!variable_global_exists("win_size_index")) global.win_size_index = 0;
-if (!variable_global_exists("fullscreen"))     global.fullscreen = window_get_fullscreen();
-if (!variable_global_exists("brightness"))     global.brightness = 0.25;
-
-if (!variable_global_exists("vol_master")) global.vol_master = 1.0;
-if (!variable_global_exists("vol_sfx"))    global.vol_sfx = 1.0;
-if (!variable_global_exists("vol_music"))  global.vol_music = 1.0;
-
 function refresh_options()
 {
-    option[0, 0] = "Start Game";
+    var has_controller = instance_exists(obj_game_controller);
+    var has_save = scr_save_exists();
+
+    option[0, 0] = has_save ? "Resume" : "Start Game";
     option[0, 1] = "Settings";
-    option[0, 2] = "Quit Game";
+
+    if (has_save)
+    {
+        option[0, 2] = "Delete Save";
+        option[0, 3] = "Quit Game";
+    }
+    else
+    {
+        option[0, 2] = "Quit Game";
+    }
 
     option[1, 0] = "Graphics Settings";
     option[1, 1] = "Audio Settings";
     option[1, 2] = "Back";
 
-    global.win_size_index = clamp(global.win_size_index, 0, array_length(global.win_sizes) - 1);
+    if (!has_controller || !variable_global_exists("win_sizes") || !variable_global_exists("win_size_index"))
+    {
+        option[2, 0] = "Window Size: (loading)";
+        option[2, 1] = "Fullscreen: (loading)";
+        option[2, 2] = "Brightness: (loading)";
+        option[2, 3] = "Back";
 
+        option[3, 0] = "Master: (loading)";
+        option[3, 1] = "SFX: (loading)";
+        option[3, 2] = "Music: (loading)";
+        option[3, 3] = "Back";
+        return;
+    }
+
+    global.win_size_index = clamp(global.win_size_index, 0, array_length(global.win_sizes) - 1);
     var w = global.win_sizes[global.win_size_index][0];
     var h = global.win_sizes[global.win_size_index][1];
 
@@ -64,19 +84,6 @@ function refresh_options()
     option[3, 1] = "SFX: " + string(round(global.vol_sfx * 100)) + "%";
     option[3, 2] = "Music: " + string(round(global.vol_music * 100)) + "%";
     option[3, 3] = "Back";
-}
-
-if (instance_exists(obj_game_controller))
-{
-    with (obj_game_controller)
-    {
-        pause_set(false);
-        apply_settings();
-    }
-}
-else
-{
-    audio_master_gain(global.vol_master);
 }
 
 refresh_options();

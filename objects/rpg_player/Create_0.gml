@@ -1,3 +1,7 @@
+active = false;
+visible = false;
+active = true;
+
 xspd = 0;
 yspd = 0;
 

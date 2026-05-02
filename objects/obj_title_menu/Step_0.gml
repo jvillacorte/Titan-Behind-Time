@@ -8,23 +8,17 @@ var delta = right_key - left_key;
 
 op_length = get_op_length();
 
+// move cursor
 pos += down_key - up_key;
+if (pos >= op_length) pos = 0;
+if (pos < 0) pos = op_length - 1;
 
-if (pos >= op_length)
-{
-    pos = 0;
-}
-
-if (pos < 0)
-{
-    pos = op_length - 1;
-}
-
+// left/right changes
 if (delta != 0)
 {
     switch (menu_level)
     {
-        case 2:
+        case 2: // graphics
             switch (pos)
             {
                 case 0:
@@ -33,16 +27,8 @@ if (delta != 0)
                         global.win_size_index += delta;
 
                         var max_i = array_length(global.win_sizes) - 1;
-
-                        if (global.win_size_index > max_i)
-                        {
-                            global.win_size_index = 0;
-                        }
-
-                        if (global.win_size_index < 0)
-                        {
-                            global.win_size_index = max_i;
-                        }
+                        if (global.win_size_index > max_i) global.win_size_index = 0;
+                        if (global.win_size_index < 0) global.win_size_index = max_i;
 
                         var w = global.win_sizes[global.win_size_index][0];
                         var h = global.win_sizes[global.win_size_index][1];
@@ -61,7 +47,7 @@ if (delta != 0)
             }
             break;
 
-        case 3:
+        case 3: // audio
             switch (pos)
             {
                 case 0:
@@ -92,6 +78,7 @@ if (delta != 0)
     refresh_options();
 }
 
+// accept
 if (accept_key)
 {
     var prev = menu_level;
@@ -99,10 +86,20 @@ if (accept_key)
     switch (menu_level)
     {
         case 0:
+        {
+            var has_save = scr_save_exists();
+
             switch (pos)
             {
                 case 0:
-                    room_goto(rm_bedroom);
+                    if (has_save)
+                    {
+                        scr_load_game();
+                    }
+                    else
+                    {
+                        with (obj_game_controller) start_new_game();
+                    }
                     break;
 
                 case 1:
@@ -110,54 +107,46 @@ if (accept_key)
                     break;
 
                 case 2:
+                    if (has_save)
+                    {
+                        scr_save_delete();
+                        pos = 0;
+                    }
+                    else
+                    {
+                        game_end();
+                    }
+                    break;
+
+                case 3:
                     game_end();
                     break;
             }
-            break;
+        }
+        break;
 
         case 1:
             switch (pos)
             {
-                case 0:
-                    menu_level = 2;
-                    break;
-
-                case 1:
-                    menu_level = 3;
-                    break;
-
-                case 2:
-                    menu_level = 0;
-                    break;
+                case 0: menu_level = 2; break;
+                case 1: menu_level = 3; break;
+                case 2: menu_level = 0; break;
             }
             break;
 
         case 2:
-            if (pos == 3)
-            {
-                menu_level = 1;
-            }
+            if (pos == 3) menu_level = 1;
             break;
 
         case 3:
-            if (pos == 3)
-            {
-                menu_level = 1;
-            }
+            if (pos == 3) menu_level = 1;
             break;
     }
 
-    if (prev != menu_level)
-    {
-        pos = 0;
-    }
+    if (prev != menu_level) pos = 0;
 
     op_length = get_op_length();
-
-    if (pos >= op_length)
-    {
-        pos = 0;
-    }
+    if (pos >= op_length) pos = 0;
 
     refresh_options();
 }

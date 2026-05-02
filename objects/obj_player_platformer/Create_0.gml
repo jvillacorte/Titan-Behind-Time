@@ -1,3 +1,6 @@
+active = false;
+visible = false;
+
 xspeed = 0;     // NOTE: all variables changable later   
 yspeed = 0;
 playerhp = 5;

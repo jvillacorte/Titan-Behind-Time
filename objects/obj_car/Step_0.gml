@@ -1,3 +1,6 @@
+if (!active) exit;
+if (global.game_paused) exit;
+
 if (keyboard_check_pressed(ord("Q")))
 {
     x = spawn_x;

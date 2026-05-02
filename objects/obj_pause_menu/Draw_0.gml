@@ -1,10 +1,8 @@
-
 draw_set_font(global.font_main);
 
 op_length = get_op_length();
 
 var _new_w = 0;
-
 for (var i = 0; i < op_length; i++)
 {
     _new_w = max(_new_w, string_width(option[menu_level, i]));
@@ -24,29 +22,16 @@ y = camera_get_view_y(view_camera[0])
     + camera_get_view_height(view_camera[0]) / 2
     - height / 2;
 
-draw_sprite_ext(
-    sprite_index,
-    image_index,
-    x,
-    y,
-    width / sprite_width,
-    height / sprite_height,
-    0,
-    c_white,
-    1
-);
+draw_sprite_ext(sprite_index, image_index, x, y,
+    width / sprite_width, height / sprite_height,
+    0, c_white, 1);
 
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 
 for (var i = 0; i < op_length; i++)
 {
-    var _c = c_white;
-
-    if (pos == i)
-    {
-        _c = c_yellow;
-    }
+    var _c = (pos == i) ? c_yellow : c_white;
 
     draw_text_color(
         x + op_border,
@@ -68,6 +53,5 @@ if (global.brightness > 0)
     var vh = camera_get_view_height(view_camera[0]);
 
     draw_rectangle(vx, vy, vx + vw, vy + vh, false);
-
     draw_set_alpha(1);
 }

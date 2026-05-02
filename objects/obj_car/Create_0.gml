@@ -1,3 +1,6 @@
+active = false;
+visible = false;
+
 prev_x = x;
 prev_y = y;
 real_speed = 0;

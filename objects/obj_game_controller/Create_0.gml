@@ -1,6 +1,8 @@
+// -------------------- pause state --------------------
 global.game_paused = false;
 global.pause_menu_inst = noone;
 
+// -------------------- graphics/audio settings --------------------
 global.win_sizes =
 [
     [1024, 576],
@@ -12,7 +14,7 @@ global.win_sizes =
     [2560, 1440]
 ];
 
-if (!variable_global_exists("win_size_index")) global.win_size_index = 0;
+if (!variable_global_exists("win_size_index")) global.win_size_index = 2;
 if (!variable_global_exists("fullscreen"))     global.fullscreen = window_get_fullscreen();
 if (!variable_global_exists("brightness"))     global.brightness = 0.25;
 
@@ -76,18 +78,173 @@ function settings_save()
     ini_close();
 }
 
+// -------------------- pause helpers --------------------
 function pause_set(_paused)
 {
     global.game_paused = _paused;
 
-    if (_paused)
-    {
-        audio_pause_all();
-    }
-    else
-    {
-        audio_resume_all();
-    }
+    if (_paused) audio_pause_all();
+    else audio_resume_all();
 }
 
+// -------------------- SAVE SYSTEM --------------------
+global.save_filename = "save.ini";
+
+// pending load info applied after room changes
+global.pending_load = false;
+global.pending_mode = "rpg";          // "rpg" | "car" | "platformer"
+global.pending_room_name = "rm_bedroom";
+global.pending_x = 0;
+global.pending_y = 0;
+global.pending_face = 0;
+
+function save_exists()
+{
+    return file_exists(global.save_filename);
+}
+
+function save_delete()
+{
+    if (file_exists(global.save_filename))
+    {
+        file_delete(global.save_filename);
+    }
+	toast_show("Save deleted", 90);
+}
+
+// Detect mode by what's in the current room
+function detect_mode()
+{
+    if (instance_exists(obj_car)) return "car";
+    if (instance_exists(obj_player_platformer)) return "platformer";
+    return "rpg";
+}
+
+function save_game()
+{
+    var mode = detect_mode();
+
+    ini_open(global.save_filename);
+
+    ini_write_string("meta", "version", "1");
+    ini_write_string("state", "mode", mode);
+    ini_write_string("state", "room", room_get_name(room));
+
+    switch (mode)
+    {
+        case "rpg":
+            if (instance_exists(rpg_player))
+            {
+                ini_write_real("rpg", "x", rpg_player.x);
+                ini_write_real("rpg", "y", rpg_player.y);
+
+                if (variable_instance_exists(rpg_player.id, "face"))
+                    ini_write_real("rpg", "face", rpg_player.face);
+            }
+            break;
+
+        case "car":
+            if (instance_exists(obj_car))
+            {
+                ini_write_real("car", "x", obj_car.x);
+                ini_write_real("car", "y", obj_car.y);
+            }
+            break;
+
+        case "platformer":
+            if (instance_exists(obj_player_platformer))
+            {
+                ini_write_real("platformer", "x", obj_player_platformer.x);
+                ini_write_real("platformer", "y", obj_player_platformer.y);
+            }
+            break;
+    }
+	
+    ini_close();
+	toast_show("Game saved", 90);
+}
+
+function load_game()
+{
+    if (!file_exists(global.save_filename))
+        return false;
+
+    ini_open(global.save_filename);
+
+    var ver = ini_read_string("meta", "version", "");
+    if (ver != "1")
+    {
+        ini_close();
+        return false;
+    }
+
+    var mode = ini_read_string("state", "mode", "rpg");
+    var room_name = ini_read_string("state", "room", "rm_bedroom");
+
+    var sx = 0;
+    var sy = 0;
+    var sface = 0;
+
+    switch (mode)
+    {
+        case "rpg":
+            sx = ini_read_real("rpg", "x", 0);
+            sy = ini_read_real("rpg", "y", 0);
+            sface = ini_read_real("rpg", "face", 0);
+            break;
+
+        case "car":
+            sx = ini_read_real("car", "x", 0);
+            sy = ini_read_real("car", "y", 0);
+            break;
+
+        case "platformer":
+            sx = ini_read_real("platformer", "x", 0);
+            sy = ini_read_real("platformer", "y", 0);
+            break;
+    }
+
+    ini_close();
+
+    global.pending_load = true;
+    global.pending_mode = mode;
+    global.pending_room_name = room_name;
+    global.pending_x = sx;
+    global.pending_y = sy;
+    global.pending_face = sface;
+
+    var target_room = asset_get_index(room_name);
+    if (target_room == -1)
+    {
+        global.pending_load = false;
+		toast_show("Save room missing", 120);
+        return false;
+    }
+	toast_show("Resuming...", 90);
+    room_goto(target_room);
+    return true;
+}
+
+// -------------------- New Game helper --------------------
+global.new_game = false;
+
+function start_new_game()
+{
+    global.new_game = true;
+    room_goto(rm_bedroom);
+}
+
+// -------------------- UI Toast (top-right message) --------------------
+if (!variable_global_exists("toast_text"))     global.toast_text = "";
+if (!variable_global_exists("toast_time"))     global.toast_time = 0;
+if (!variable_global_exists("toast_time_max")) global.toast_time_max = 90;
+
+function toast_show(_text, _time)
+{
+    global.toast_text = _text;
+    global.toast_time_max = max(1, _time);
+    global.toast_time = global.toast_time_max;
+}
+
+// init
 settings_load();
