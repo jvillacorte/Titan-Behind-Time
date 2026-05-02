@@ -14,7 +14,7 @@ function get_op_length()
     switch (menu_level)
     {
         case 0:
-            return 3; // Start / Settings / Quit
+            return 4; // Resume / Settings / Quit to Main / Quit Desktop
         case 1:
             return 3; // Graphics / Audio / Back
         case 2:
@@ -26,25 +26,12 @@ function get_op_length()
     return 0;
 }
 
-// fallback defaults (prevents crashes if controller wasn't created yet)
-if (!variable_global_exists("win_sizes"))
-{
-    global.win_sizes = [[1280, 720], [1600, 900], [1920, 1080]];
-}
-
-if (!variable_global_exists("win_size_index")) global.win_size_index = 0;
-if (!variable_global_exists("fullscreen"))     global.fullscreen = window_get_fullscreen();
-if (!variable_global_exists("brightness"))     global.brightness = 0.25;
-
-if (!variable_global_exists("vol_master")) global.vol_master = 1.0;
-if (!variable_global_exists("vol_sfx"))    global.vol_sfx = 1.0;
-if (!variable_global_exists("vol_music"))  global.vol_music = 1.0;
-
 function refresh_options()
 {
-    option[0, 0] = "Start Game";
+    option[0, 0] = "Resume";
     option[0, 1] = "Settings";
-    option[0, 2] = "Quit Game";
+    option[0, 2] = "Quit to Main Menu";
+    option[0, 3] = "Quit to Desktop";
 
     option[1, 0] = "Graphics Settings";
     option[1, 1] = "Audio Settings";
@@ -64,19 +51,6 @@ function refresh_options()
     option[3, 1] = "SFX: " + string(round(global.vol_sfx * 100)) + "%";
     option[3, 2] = "Music: " + string(round(global.vol_music * 100)) + "%";
     option[3, 3] = "Back";
-}
-
-if (instance_exists(obj_game_controller))
-{
-    with (obj_game_controller)
-    {
-        pause_set(false);
-        apply_settings();
-    }
-}
-else
-{
-    audio_master_gain(global.vol_master);
 }
 
 refresh_options();

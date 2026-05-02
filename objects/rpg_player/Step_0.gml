@@ -1,3 +1,10 @@
+if (global.game_paused)
+{
+    xspd = 0;
+    yspd = 0;
+    exit;
+}
+
 right_key = keyboard_check(vk_right) || keyboard_check(ord("D"));
 left_key = keyboard_check(vk_left) || keyboard_check(ord("A"));
 up_key = keyboard_check(vk_up) || keyboard_check(ord("W"));

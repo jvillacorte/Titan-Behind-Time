@@ -102,7 +102,16 @@ if (accept_key)
             switch (pos)
             {
                 case 0:
-                    room_goto(rm_bedroom);
+                    if (instance_exists(obj_game_controller))
+                    {
+                        with (obj_game_controller)
+                        {
+                            pause_set(false);
+                        }
+                    }
+
+                    global.pause_menu_inst = noone;
+                    instance_destroy();
                     break;
 
                 case 1:
@@ -110,6 +119,19 @@ if (accept_key)
                     break;
 
                 case 2:
+                    if (instance_exists(obj_game_controller))
+                    {
+                        with (obj_game_controller)
+                        {
+                            pause_set(false);
+                        }
+                    }
+
+                    global.pause_menu_inst = noone;
+                    room_goto(rm_title_screen);
+                    break;
+
+                case 3:
                     game_end();
                     break;
             }

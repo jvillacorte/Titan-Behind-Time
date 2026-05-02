@@ -1,21 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"rpg_player",
+  "%Name":"obj_game_controller",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"rpg_player",
+  "name":"obj_game_controller",
   "overriddenProperties":[],
   "parent":{
-    "name":"RPG Assets",
-    "path":"folders/RPG Assets.yy",
+    "name":"Menu",
+    "path":"folders/Menu.yy",
   },
-  "parentObjectId":{
-    "name":"par_pauseable",
-    "path":"objects/par_pauseable/par_pauseable.yy",
-  },
+  "parentObjectId":null,
   "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -35,5 +32,5 @@
   "solid":false,
   "spriteId":null,
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

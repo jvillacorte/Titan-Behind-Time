@@ -1,3 +1,4 @@
+
 draw_set_font(global.font_main);
 
 op_length = get_op_length();
