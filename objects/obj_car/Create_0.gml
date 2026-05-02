@@ -1,5 +1,5 @@
-active = false;
-visible = false;
+active = true;
+visible = true;
 
 prev_x = x;
 prev_y = y;

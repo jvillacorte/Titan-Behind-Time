@@ -62,6 +62,9 @@ if (variable_global_exists("pending_load") && global.pending_load)
             {
                 with (obj_car)
                 {
+					active = true;
+                    visible = true;
+					
                     x = global.pending_x;
                     y = global.pending_y;
                 }

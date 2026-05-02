@@ -1,5 +1,5 @@
-active = false;
-visible = false;
+active = true;
+visible = true;
 
 xspeed = 0;     // NOTE: all variables changable later   
 yspeed = 0;
