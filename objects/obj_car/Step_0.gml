@@ -1,5 +1,5 @@
 if (!active) exit;
-if (global.game_paused) exit;
+if (variable_global_exists("game_paused") && global.game_paused) exit;
 
 if (keyboard_check_pressed(ord("Q")))
 {
@@ -9,8 +9,11 @@ if (keyboard_check_pressed(ord("Q")))
     spd = 0;
     steer_angle = 0;
 
-    // IMPORTANT: keep unrotated for collisions
     image_angle = 0;
+
+    prev_x = x;
+    prev_y = y;
+    real_speed = 0;
 
     exit;
 }
@@ -59,14 +62,59 @@ direction += steer_angle * speed_factor * reverse_mult;
 var xspd = lengthdir_x(spd, direction);
 var yspd = lengthdir_y(spd, direction);
 
-// collisions (same as your version)
-if (place_meeting(x + xspd, y, obj_road_edge)) xspd = 0;
-if (place_meeting(x, y + yspd, obj_road_edge)) yspd = 0;
-
+// apply movement
 x += xspd;
 y += yspd;
 
+// ------------------------------------------------------------
+// Clamp car within road borders (requires obj_highway_gen)
+// ------------------------------------------------------------
 var gen = instance_find(obj_highway_gen, 0);
+if (instance_exists(gen))
+{
+    // More reliable "half width" than sprite_width:
+    // bbox_* uses the current mask bounds.
+    var half_car = max(1, (bbox_right - bbox_left) * 0.5);
+
+    // If you want clamp to match the *drawn* road including overdraw,
+    // use the next line instead:
+    // var half_road = gen.road_half_w + gen.overdraw * 0.5;
+
+    var half_road = gen.road_half_w; // clamp to actual road width (no overdraw)
+
+    var left_bound  = gen.road_center_x - half_road + half_car;
+    var right_bound = gen.road_center_x + half_road - half_car;
+
+    // If car is wider than road bounds, avoid inverted clamp:
+    if (left_bound > right_bound)
+    {
+        var mid = gen.road_center_x;
+        left_bound = mid;
+        right_bound = mid;
+    }
+
+    // Clamp and cancel horizontal movement when hitting wall
+    var oldx = x;
+    x = clamp(x, left_bound, right_bound);
+
+    if (x != oldx)
+    {
+        // If you want: lose speed when scraping wall
+        // spd *= 0.98;
+
+        // prevent continuous "push" into wall from xspd
+        // (not strictly required but feels better)
+        // Note: xspd is local; we just zero real_speed effect is fine.
+    }
+}
+else
+{
+    // Debug helper: if clamp isn't working, it's usually because gen isn't in the room.
+    // Uncomment to verify at runtime:
+    // show_debug_message("No obj_highway_gen instance found; clamp skipped");
+}
+
+// stop at end of run (optional; only if generator exists)
 if (instance_exists(gen) && gen.run_done && y <= 0)
 {
     y = 0;
@@ -74,10 +122,9 @@ if (instance_exists(gen) && gen.run_done && y <= 0)
     steer_angle = 0;
 }
 
-// IMPORTANT: keep unrotated for collisions
 image_angle = 0;
 
-// tread marks (unchanged)
+// tread marks
 if (abs(spd) > tread_min_speed)
 {
     tread_timer += 1;

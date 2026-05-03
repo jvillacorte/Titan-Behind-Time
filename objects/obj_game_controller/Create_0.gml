@@ -148,6 +148,14 @@ function save_game()
             {
                 ini_write_real("car", "x", obj_car.x);
                 ini_write_real("car", "y", obj_car.y);
+
+                // save driving state
+                if (variable_instance_exists(obj_car.id, "direction")) ini_write_real("car", "direction", obj_car.direction);
+                if (variable_instance_exists(obj_car.id, "spd"))       ini_write_real("car", "spd", obj_car.spd);
+                if (variable_instance_exists(obj_car.id, "steer_angle")) ini_write_real("car", "steer_angle", obj_car.steer_angle);
+                // optionally save spawn_x/spawn_y if you want persistent spawn
+                if (variable_instance_exists(obj_car.id, "spawn_x")) ini_write_real("car", "spawn_x", obj_car.spawn_x);
+                if (variable_instance_exists(obj_car.id, "spawn_y")) ini_write_real("car", "spawn_y", obj_car.spawn_y);
             }
             break;
 
@@ -159,15 +167,20 @@ function save_game()
             }
             break;
     }
-	
+
     ini_close();
-	toast_show("Game saved", 90);
+
+    // feedback toast (already suggested)
+    toast_show("Game saved", 90);
 }
 
 function load_game()
 {
     if (!file_exists(global.save_filename))
+    {
+        toast_show("No save found", 90);
         return false;
+    }
 
     ini_open(global.save_filename);
 
@@ -175,6 +188,7 @@ function load_game()
     if (ver != "1")
     {
         ini_close();
+        toast_show("Unsupported save version", 120);
         return false;
     }
 
@@ -184,6 +198,13 @@ function load_game()
     var sx = 0;
     var sy = 0;
     var sface = 0;
+
+    // clear pending car values
+    global.pending_car_direction = undefined;
+    global.pending_car_spd       = undefined;
+    global.pending_car_steer     = undefined;
+    global.pending_car_spawnx    = undefined;
+    global.pending_car_spawny    = undefined;
 
     switch (mode)
     {
@@ -196,6 +217,22 @@ function load_game()
         case "car":
             sx = ini_read_real("car", "x", 0);
             sy = ini_read_real("car", "y", 0);
+
+            // read optional car values as strings and parse if present
+            var tmp = ini_read_string("car", "direction", "");
+            if (tmp != "") global.pending_car_direction = real(tmp);
+
+            tmp = ini_read_string("car", "spd", "");
+            if (tmp != "") global.pending_car_spd = real(tmp);
+
+            tmp = ini_read_string("car", "steer_angle", "");
+            if (tmp != "") global.pending_car_steer = real(tmp);
+
+            tmp = ini_read_string("car", "spawn_x", "");
+            if (tmp != "") global.pending_car_spawnx = real(tmp);
+
+            tmp = ini_read_string("car", "spawn_y", "");
+            if (tmp != "") global.pending_car_spawny = real(tmp);
             break;
 
         case "platformer":
@@ -217,10 +254,11 @@ function load_game()
     if (target_room == -1)
     {
         global.pending_load = false;
-		toast_show("Save room missing", 120);
+        toast_show("Save room missing", 120);
         return false;
     }
-	toast_show("Resuming...", 90);
+
+    toast_show("Resuming...", 90);
     room_goto(target_room);
     return true;
 }

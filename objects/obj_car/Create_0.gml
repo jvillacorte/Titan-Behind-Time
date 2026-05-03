@@ -34,5 +34,5 @@ max_steer_angle = 3.8;
 steer_return = 0.16;
 steer_lerp = 0.22;
 
-image_angle = direction + sprite_angle_offset;
-
+// keep unrotated for collisions (we're using math bounds now, but leaving this is fine)
+image_angle = 0;

@@ -16,7 +16,10 @@
     "name":"Platformer Assets",
     "path":"folders/Platformer Assets.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"par_pauseable",
+    "path":"objects/par_pauseable/par_pauseable.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
