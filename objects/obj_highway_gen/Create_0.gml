@@ -5,8 +5,8 @@ seg_len     = max(1, 12);
 gen_ahead   = 1200;
 keep_behind = 650;
 
-lane_count  = 5;
-lane_w      = 50;
+lane_count  = 7;
+lane_w      = 65;
 shoulder_w  = 0;
 
 road_total_w = lane_count * lane_w + shoulder_w * 2;

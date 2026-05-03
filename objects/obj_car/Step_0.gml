@@ -62,9 +62,34 @@ direction += steer_angle * speed_factor * reverse_mult;
 var xspd = lengthdir_x(spd, direction);
 var yspd = lengthdir_y(spd, direction);
 
-// apply movement
-x += xspd;
-y += yspd;
+// apply movement with obj_wall collisions
+var nx = x + xspd;
+var ny = y + yspd;
+
+// move X
+if (!place_meeting(nx, y, obj_wall))
+{
+    x = nx;
+}
+else
+{
+    // stop pushing into the wall horizontally
+    xspd = 0;
+}
+
+// move Y
+if (!place_meeting(x, ny, obj_wall))
+{
+    y = ny;
+}
+else
+{
+    // stop pushing into the wall vertically
+    yspd = 0;
+
+    // optional: if you want walls to stop the car completely:
+    // spd = 0;
+}
 
 // ------------------------------------------------------------
 // Clamp car within road borders (requires obj_highway_gen)
