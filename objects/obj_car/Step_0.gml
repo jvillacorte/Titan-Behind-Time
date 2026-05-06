@@ -1,3 +1,5 @@
+// obj_car : Step
+
 if (!active) exit;
 if (variable_global_exists("game_paused") && global.game_paused) exit;
 
@@ -62,55 +64,61 @@ direction += steer_angle * speed_factor * reverse_mult;
 var xspd = lengthdir_x(spd, direction);
 var yspd = lengthdir_y(spd, direction);
 
-// apply movement with obj_wall collisions
 var nx = x + xspd;
 var ny = y + yspd;
 
-// move X
-if (!place_meeting(nx, y, obj_wall))
+if (!place_meeting(nx, y, obj_wall) && !place_meeting(nx, y, obj_car_obstacle))
 {
     x = nx;
 }
 else
 {
-    // stop pushing into the wall horizontally
     xspd = 0;
+    spd = max(0, spd - 0.5);
+    x -= lengthdir_x(2, direction);
+    y -= lengthdir_y(2, direction);
 }
 
-// move Y
-if (!place_meeting(x, ny, obj_wall))
+if (!place_meeting(x, ny, obj_wall) && !place_meeting(x, ny, obj_car_obstacle))
 {
     y = ny;
 }
 else
 {
-    // stop pushing into the wall vertically
     yspd = 0;
-
-    // optional: if you want walls to stop the car completely:
-    // spd = 0;
+    spd = max(0, spd - 0.5);
+    x -= lengthdir_x(2, direction);
+    y -= lengthdir_y(2, direction);
 }
 
-// ------------------------------------------------------------
-// Clamp car within road borders (requires obj_highway_gen)
-// ------------------------------------------------------------
+if (y > 370)
+{
+    y = 370;
+    if (spd > 0) spd = 0;
+}
+
+if (place_meeting(x, y, obj_car_obstacle))
+{
+    var obs = instance_place(x, y, obj_car_obstacle);
+    if (obs != noone)
+    {
+        if (!variable_instance_exists(obs, "hit_cooldown") || obs.hit_cooldown <= 0)
+        {
+            spd = max(0, spd - obs.slow_amount);
+            obs.hit_cooldown = room_speed div 4;
+        }
+    }
+}
+
 var gen = instance_find(obj_highway_gen, 0);
 if (instance_exists(gen))
 {
-    // More reliable "half width" than sprite_width:
-    // bbox_* uses the current mask bounds.
     var half_car = max(1, (bbox_right - bbox_left) * 0.5);
-
-    // If you want clamp to match the *drawn* road including overdraw,
-    // use the next line instead:
-    // var half_road = gen.road_half_w + gen.overdraw * 0.5;
-
-    var half_road = gen.road_half_w; // clamp to actual road width (no overdraw)
+    var half_road = gen.road_half_w;
 
     var left_bound  = gen.road_center_x - half_road + half_car;
     var right_bound = gen.road_center_x + half_road - half_car;
 
-    // If car is wider than road bounds, avoid inverted clamp:
     if (left_bound > right_bound)
     {
         var mid = gen.road_center_x;
@@ -118,28 +126,14 @@ if (instance_exists(gen))
         right_bound = mid;
     }
 
-    // Clamp and cancel horizontal movement when hitting wall
     var oldx = x;
     x = clamp(x, left_bound, right_bound);
-
-    if (x != oldx)
-    {
-        // If you want: lose speed when scraping wall
-        // spd *= 0.98;
-
-        // prevent continuous "push" into wall from xspd
-        // (not strictly required but feels better)
-        // Note: xspd is local; we just zero real_speed effect is fine.
-    }
 }
 else
 {
-    // Debug helper: if clamp isn't working, it's usually because gen isn't in the room.
-    // Uncomment to verify at runtime:
-    // show_debug_message("No obj_highway_gen instance found; clamp skipped");
+    // no generator
 }
 
-// stop at end of run (optional; only if generator exists)
 if (instance_exists(gen) && gen.run_done && y <= 0)
 {
     y = 0;
@@ -149,7 +143,6 @@ if (instance_exists(gen) && gen.run_done && y <= 0)
 
 image_angle = 0;
 
-// tread marks
 if (abs(spd) > tread_min_speed)
 {
     tread_timer += 1;
@@ -167,10 +160,10 @@ if (abs(spd) > tread_min_speed)
         var rx = rear_x + lengthdir_x(tread_side, direction - 90);
         var ry = rear_y + lengthdir_y(tread_side, direction - 90);
 
-        var m1 = instance_create_layer(lx, ly, layer, obj_tread_mark);
+        var m1 = instance_create_depth(lx, ly, depth + 1, obj_tread_mark);
         m1.mark_dir = direction;
 
-        var m2 = instance_create_layer(rx, ry, layer, obj_tread_mark);
+        var m2 = instance_create_depth(rx, ry, depth + 1, obj_tread_mark);
         m2.mark_dir = direction;
     }
 }

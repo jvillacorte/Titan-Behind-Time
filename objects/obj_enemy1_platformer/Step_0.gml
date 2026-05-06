@@ -1,3 +1,5 @@
+if (global.game_paused) exit;
+
 // if we are dead:
 if (hp <= 0) && (!is_dead) 
 {
