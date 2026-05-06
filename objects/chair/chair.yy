@@ -5,10 +5,6 @@
   "managed":true,
   "name":"chair",
   "overriddenProperties":[],
-  "parent":{
-    "name":"obj",
-    "path":"folders/RPG Assets/obj.yy",
-  },
   "parentObjectId":{
     "name":"obj_wall",
     "path":"objects/obj_wall/obj_wall.yy",
