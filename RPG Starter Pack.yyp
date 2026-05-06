@@ -84,6 +84,7 @@
     {"id":{"name":"rm_bedroom_1","path":"rooms/rm_bedroom_1/rm_bedroom_1.yy",},},
     {"id":{"name":"rm_bedroom","path":"rooms/rm_bedroom/rm_bedroom.yy",},},
     {"id":{"name":"rm_living_room","path":"rooms/rm_living_room/rm_living_room.yy",},},
+    {"id":{"name":"rm_outside_school","path":"rooms/rm_outside_school/rm_outside_school.yy",},},
     {"id":{"name":"rm_Platformer_Fighter","path":"rooms/rm_Platformer_Fighter/rm_Platformer_Fighter.yy",},},
     {"id":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
     {"id":{"name":"rm_title_screen","path":"rooms/rm_title_screen/rm_title_screen.yy",},},
@@ -176,6 +177,7 @@
     {"roomId":{"name":"rm_victory_room","path":"rooms/rm_victory_room/rm_victory_room.yy",},},
     {"roomId":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
     {"roomId":{"name":"rm_bedroom_1","path":"rooms/rm_bedroom_1/rm_bedroom_1.yy",},},
+    {"roomId":{"name":"rm_outside_school","path":"rooms/rm_outside_school/rm_outside_school.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
