@@ -1,1 +1,1 @@
-target_room = rm_victory;
+target_room = rm_schoolyard;
