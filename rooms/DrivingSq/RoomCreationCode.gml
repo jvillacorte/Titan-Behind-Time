@@ -1,4 +1,6 @@
-target_x = 0;
-target_y = 0;
-target_rm = rm_victory_room;
-target_face = DOWN;
+// drivingsq: Room Start
+with (rpg_player)
+{
+    active = false;
+    visible = false; // optional
+}

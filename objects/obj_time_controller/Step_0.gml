@@ -10,16 +10,6 @@ if (!global.game_paused && running)
     {
         countdown = 0;
         running = false;
-
-        // go to fail room (only if we're not already there)
-        if (room != rm_fail)
-        {
-            // optional: clear pause/menu state so it doesn't carry over
-            global.game_paused = false;
-            global.pause_menu_inst = noone;
-
-            room_goto(rm_fail);
-        }
     }
 }
 
