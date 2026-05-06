@@ -8,6 +8,9 @@ if (instance_exists(rpg_player))
     }
 }
 
+menu_off_x = 0;    // + moves right, - moves left
+menu_off_y = 65;  // + moves down,  - moves up
+
 width = 90;
 height = 70;
 

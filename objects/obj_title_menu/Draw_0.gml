@@ -14,13 +14,11 @@ height = op_border * 2
     + string_height(option[menu_level, 0])
     + (op_length - 1) * op_space;
 
-x = camera_get_view_x(view_camera[0])
-    + camera_get_view_width(view_camera[0]) / 2
-    - width / 2;
+var cx = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) * 0.5;
+var cy = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) * 0.5;
 
-y = camera_get_view_y(view_camera[0])
-    + camera_get_view_height(view_camera[0]) / 2
-    - height / 2;
+x = cx - width * 0.5 + menu_off_x;
+y = cy - height * 0.5 + menu_off_y;
 
 draw_sprite_ext(sprite_index, image_index, x, y,
     width / sprite_width, height / sprite_height,
