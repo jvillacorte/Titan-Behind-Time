@@ -1,3 +1,5 @@
+// obj_pause_menu : Step
+
 var up_key = keyboard_check_pressed(vk_up);
 var down_key = keyboard_check_pressed(vk_down);
 var left_key = keyboard_check_pressed(vk_left);
@@ -105,11 +107,13 @@ if (accept_key)
                 case 3:
                     if (has_save)
                     {
+                        // Delete Save
                         scr_save_delete();
                         pos = 0;
                     }
                     else
                     {
+                        // Quit to Main Menu (no save)
                         with (obj_game_controller) pause_set(false);
                         global.pause_menu_inst = noone;
 
@@ -125,6 +129,7 @@ if (accept_key)
                 case 4:
                     if (has_save)
                     {
+                        // Quit to Main Menu (has save)
                         with (obj_game_controller) pause_set(false);
                         global.pause_menu_inst = noone;
 
@@ -137,11 +142,15 @@ if (accept_key)
                     }
                     else
                     {
+                        // Quit to Desktop (no save menu layout) -> SAVE THEN QUIT
+                        scr_save_game();
                         game_end();
                     }
                     break;
 
                 case 5:
+                    // Quit to Desktop (has save menu layout) -> SAVE THEN QUIT
+                    scr_save_game();
                     game_end();
                     break;
             }

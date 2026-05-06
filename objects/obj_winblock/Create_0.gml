@@ -1,1 +1,1 @@
-target_room = rm_victory_room;
+target_room = rm_victory;

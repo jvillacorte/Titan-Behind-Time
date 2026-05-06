@@ -1,3 +1,4 @@
+
 // -------------------- pause state --------------------
 global.game_paused = false;
 global.pause_menu_inst = noone;
@@ -22,7 +23,6 @@ if (!variable_global_exists("vol_master")) global.vol_master = 1.0;
 if (!variable_global_exists("vol_sfx"))    global.vol_sfx = 1.0;
 if (!variable_global_exists("vol_music"))  global.vol_music = 1.0;
 
-// NEW: persist selected background music track (saved in settings.ini)
 if (!variable_global_exists("music_track_index")) global.music_track_index = 0;
 
 function apply_settings()
@@ -34,7 +34,6 @@ function apply_settings()
     global.vol_sfx = clamp(global.vol_sfx, 0, 1);
     global.vol_music = clamp(global.vol_music, 0, 1);
 
-    // keep index non-negative integer (final clamp to track-count is done by obj_title_music)
     global.music_track_index = max(0, floor(global.music_track_index));
 
     window_set_fullscreen(global.fullscreen);
@@ -63,7 +62,6 @@ function settings_load()
         global.vol_sfx    = ini_read_real("audio", "sfx", global.vol_sfx);
         global.vol_music  = ini_read_real("audio", "music", global.vol_music);
 
-        // NEW:
         global.music_track_index = ini_read_real("audio", "music_track_index", global.music_track_index);
 
         ini_close();
@@ -84,7 +82,6 @@ function settings_save()
     ini_write_real("audio", "sfx", global.vol_sfx);
     ini_write_real("audio", "music", global.vol_music);
 
-    // NEW:
     ini_write_real("audio", "music_track_index", global.music_track_index);
 
     ini_close();
@@ -102,16 +99,26 @@ function pause_set(_paused)
 // -------------------- key / gate flags --------------------
 if (!variable_global_exists("has_house_key")) global.has_house_key = false;
 
+// -------------------- TIMER GLOBALS (NEW: robust saving even if obj_time_controller is not in room) --------------------
+if (!variable_global_exists("timer_countdown_start")) global.timer_countdown_start = 120;
+if (!variable_global_exists("timer_countdown"))       global.timer_countdown       = global.timer_countdown_start;
+if (!variable_global_exists("timer_running"))         global.timer_running         = true;
+if (!variable_global_exists("timer_active"))          global.timer_active          = true;
+
 // -------------------- SAVE SYSTEM --------------------
 global.save_filename = "save.ini";
 
-// pending load info applied after room changes
 global.pending_load = false;
-global.pending_mode = "rpg";          // "rpg" | "car" | "platformer"
+global.pending_mode = "rpg";
 global.pending_room_name = "rm_bedroom";
 global.pending_x = 0;
 global.pending_y = 0;
 global.pending_face = 0;
+
+global.pending_timer_countdown = -1;
+global.pending_timer_running   = false;
+global.pending_timer_start     = -1;
+global.pending_timer_active    = true;
 
 function save_exists()
 {
@@ -126,6 +133,12 @@ function save_delete()
     }
 
     global.has_house_key = false;
+
+    // reset timer globals when deleting save (optional but nice)
+    global.timer_countdown_start = 120;
+    global.timer_countdown       = global.timer_countdown_start;
+    global.timer_running         = true;
+    global.timer_active          = true;
 
     toast_show("Save deleted", 90);
 }
@@ -148,8 +161,14 @@ function save_game()
     ini_write_string("state", "mode", mode);
     ini_write_string("state", "room", room_get_name(room));
 
-    // NEW: save key state(s)
     ini_write_real("flags", "has_house_key", global.has_house_key ? 1 : 0);
+
+    // -------------------- TIMER (UPDATED) --------------------
+    // Save from globals so Quit/Save works even if obj_time_controller doesn't exist in this room.
+    ini_write_real("timer", "countdown",       global.timer_countdown);
+    ini_write_real("timer", "running",         global.timer_running ? 1 : 0);
+    ini_write_real("timer", "countdown_start", global.timer_countdown_start);
+    ini_write_real("timer", "active",          global.timer_active ? 1 : 0);
 
     switch (mode)
     {
@@ -188,7 +207,7 @@ function save_game()
     }
 
     ini_close();
-
+	
     toast_show("Game saved", 90);
 }
 
@@ -197,6 +216,12 @@ function load_game()
     if (!file_exists(global.save_filename))
     {
         toast_show("No save found", 90);
+
+        // reset timer globals if no save
+        global.timer_countdown       = global.timer_countdown_start;
+        global.timer_running         = true;
+        global.timer_active          = true;
+
         return false;
     }
 
@@ -213,8 +238,19 @@ function load_game()
     var mode = ini_read_string("state", "mode", "rpg");
     var room_name = ini_read_string("state", "room", "rm_bedroom");
 
-    // NEW: load key state(s)
     global.has_house_key = (ini_read_real("flags", "has_house_key", global.has_house_key ? 1 : 0) == 1);
+
+    // -------------------- TIMER (UPDATED) --------------------
+    global.pending_timer_countdown = ini_read_real("timer", "countdown", -1);
+    global.pending_timer_running   = (ini_read_real("timer", "running", 0) == 1);
+    global.pending_timer_start     = ini_read_real("timer", "countdown_start", -1);
+    global.pending_timer_active    = (ini_read_real("timer", "active", 1) == 1);
+
+    // also set globals immediately (so value exists even before obj_time_controller is created)
+    if (global.pending_timer_start >= 0)     global.timer_countdown_start = global.pending_timer_start;
+    if (global.pending_timer_countdown >= 0) global.timer_countdown       = global.pending_timer_countdown;
+    global.timer_running = global.pending_timer_running;
+    global.timer_active  = global.pending_timer_active;
 
     var sx = 0;
     var sy = 0;
@@ -282,14 +318,63 @@ function load_game()
     return true;
 }
 
+function apply_loaded_timer()
+{
+    if (!global.pending_load) return;
+
+    if (instance_exists(obj_time_controller))
+    {
+        if (global.pending_timer_start >= 0)
+            obj_time_controller.countdown_start = global.pending_timer_start;
+
+        if (global.pending_timer_countdown >= 0)
+        {
+            obj_time_controller.countdown = global.pending_timer_countdown;
+            obj_time_controller.running = global.pending_timer_running;
+            obj_time_controller.active = global.pending_timer_active;
+        }
+        else
+        {
+            obj_time_controller.countdown = obj_time_controller.countdown_start;
+            obj_time_controller.running = true;
+            obj_time_controller.active = true;
+        }
+
+        // keep globals in sync with what we applied
+        global.timer_countdown_start = obj_time_controller.countdown_start;
+        global.timer_countdown       = obj_time_controller.countdown;
+        global.timer_running         = obj_time_controller.running;
+        global.timer_active          = obj_time_controller.active;
+    }
+
+    global.pending_timer_countdown = -1;
+    global.pending_timer_running = false;
+    global.pending_timer_start = -1;
+    global.pending_timer_active = true;
+}
+
 // -------------------- New Game helper --------------------
 global.new_game = false;
 
 function start_new_game()
 {
     global.new_game = true;
-	
+
     global.has_house_key = false;
+
+    // reset timer globals
+    global.timer_countdown_start = 120;
+    global.timer_countdown       = global.timer_countdown_start;
+    global.timer_running         = true;
+    global.timer_active          = true;
+
+    if (instance_exists(obj_time_controller))
+    {
+        obj_time_controller.countdown_start = global.timer_countdown_start;
+        obj_time_controller.countdown       = global.timer_countdown;
+        obj_time_controller.running         = global.timer_running;
+        obj_time_controller.active          = global.timer_active;
+    }
 
     room_goto(rm_bedroom);
 }

@@ -5,7 +5,7 @@ active = true;
 xspd = 0;
 yspd = 0;
 
-move_spd = 2;
+move_spd = 1;
 
 sprite[RIGHT] = spr_player_right;
 sprite[UP] = spr_player_up;
