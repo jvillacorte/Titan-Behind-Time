@@ -1,6 +1,6 @@
 {
   "$GMProject":"v1",
-  "%Name":"RPG Starter Pack",
+  "%Name":"Titan Behind Time",
   "AudioGroups":[
     {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
@@ -31,7 +31,7 @@
   "MetaData":{
     "IDEVersion":"2024.14.4.222",
   },
-  "name":"RPG Starter Pack",
+  "name":"Titan Behind Time",
   "resources":[
     {"id":{"name":"ReadMe","path":"notes/ReadMe/ReadMe.yy",},},
     {"id":{"name":"chair","path":"objects/chair/chair.yy",},},
@@ -86,6 +86,9 @@
     {"id":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
     {"id":{"name":"rm_title_screen","path":"rooms/rm_title_screen/rm_title_screen.yy",},},
     {"id":{"name":"rm_victory_room","path":"rooms/rm_victory_room/rm_victory_room.yy",},},
+    {"id":{"name":"rm_fail","path":"rooms/rm_fail/rm_fail.yy",},},
+    {"id":{"name":"rm_schoolyard","path":"rooms/rm_schoolyard/rm_schoolyard.yy",},},
+    {"id":{"name":"rm_victory","path":"rooms/rm_victory/rm_victory.yy",},},
     {"id":{"name":"scr_load_game","path":"scripts/scr_load_game/scr_load_game.yy",},},
     {"id":{"name":"scr_macros","path":"scripts/scr_macros/scr_macros.yy",},},
     {"id":{"name":"scr_room_change_if_touching","path":"scripts/scr_room_change_if_touching/scr_room_change_if_touching.yy",},},
@@ -166,6 +169,9 @@
     {"roomId":{"name":"DrivingSq","path":"rooms/DrivingSq/DrivingSq.yy",},},
     {"roomId":{"name":"rm_Platformer_Fighter","path":"rooms/rm_Platformer_Fighter/rm_Platformer_Fighter.yy",},},
     {"roomId":{"name":"rm_victory_room","path":"rooms/rm_victory_room/rm_victory_room.yy",},},
+    {"roomId":{"name":"rm_fail","path":"rooms/rm_fail/rm_fail.yy",},},
+    {"roomId":{"name":"rm_schoolyard","path":"rooms/rm_schoolyard/rm_schoolyard.yy",},},
+    {"roomId":{"name":"rm_victory","path":"rooms/rm_victory/rm_victory.yy",},},
     {"roomId":{"name":"rm_rhythm_test","path":"rooms/rm_rhythm_test/rm_rhythm_test.yy",},},
   ],
   "templateType":"game",
