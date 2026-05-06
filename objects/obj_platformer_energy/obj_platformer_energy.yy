@@ -8,8 +8,8 @@
   "name":"obj_platformer_energy",
   "overriddenProperties":[],
   "parent":{
-    "name":"RPG Starter Pack",
-    "path":"RPG Starter Pack.yyp",
+    "name":"Titan Behind Time",
+    "path":"Titan Behind Time.yyp",
   },
   "parentObjectId":null,
   "persistent":false,
