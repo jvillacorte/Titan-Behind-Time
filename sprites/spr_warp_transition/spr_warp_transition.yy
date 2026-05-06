@@ -42,8 +42,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"spr",
-    "path":"folders/RPG Assets/spr.yy",
+    "name":"RPG Assets",
+    "path":"folders/RPG Assets.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
