@@ -64,6 +64,8 @@ if (delta != 0)
                     break;
             }
             break;
+
+        // NOTE: menu_level 4 (Background Music list) does NOT use left/right anymore
     }
 
     if (instance_exists(obj_game_controller))
@@ -125,22 +127,55 @@ if (accept_key)
         }
         break;
 
-        case 1:
+        case 1: // settings
             switch (pos)
             {
-                case 0: menu_level = 2; break;
-                case 1: menu_level = 3; break;
-                case 2: menu_level = 0; break;
+                case 0: menu_level = 2; break; // Graphics Settings
+                case 1: menu_level = 3; break; // Audio Settings
+                case 2: menu_level = 4; break; // Background Music (list)
+                case 3: menu_level = 0; break; // Back
             }
             break;
 
-        case 2:
+        case 2: // graphics
             if (pos == 3) menu_level = 1;
             break;
 
-        case 3:
+        case 3: // audio
             if (pos == 3) menu_level = 1;
             break;
+
+        case 4: // background music (song list)
+        {
+            var n = array_length(music_tracks);
+
+            // last entry is Back
+            if (pos == n)
+            {
+                menu_level = 1; // back to Settings
+            }
+            else
+            {
+                // select a song by row
+                global.music_track_index = clamp(pos, 0, n - 1);
+
+                // SAVE IMMEDIATELY so it persists between game launches
+                if (instance_exists(obj_game_controller))
+                {
+                    with (obj_game_controller)
+                    {
+                        // apply_settings isn't strictly required for track index,
+                        // but keeping it is fine and keeps your pattern consistent.
+                        apply_settings();
+                        settings_save();
+                    }
+                }
+
+                // Update menu text so the ">" marker moves
+                refresh_options();
+            }
+        }
+        break;
     }
 
     if (prev != menu_level) pos = 0;

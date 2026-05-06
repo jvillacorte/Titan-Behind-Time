@@ -9,7 +9,7 @@ if (instance_exists(rpg_player))
 }
 
 menu_off_x = 0;    // + moves right, - moves left
-menu_off_y = 65;  // + moves down,  - moves up
+menu_off_y = 65;   // + moves down,  - moves up
 
 width = 90;
 height = 70;
@@ -22,18 +22,41 @@ menu_level = 0;
 
 option = [];
 
+// ---------------- Background Music selection ----------------
+music_tracks = [
+    itsjustaburningmemoryquiet,
+	Susumu_Hirasawa___Parade,
+	Mice_On_Venus
+];
+
+music_track_names = [
+    "It's Just a Burning Memory",
+	"Parade",
+	"Mice On Venus"
+];
+
+if (!variable_global_exists("music_track_index")) global.music_track_index = 0;
+global.music_track_index = clamp(global.music_track_index, 0, array_length(music_tracks) - 1);
+
 function get_op_length()
 {
     switch (menu_level)
     {
         case 0:
             return scr_save_exists() ? 4 : 3;
+
         case 1:
-            return 3;
+            return 4;
+
         case 2:
             return 4;
+
         case 3:
             return 4;
+
+        case 4:
+            // one entry per track + Back
+            return array_length(music_tracks) + 1;
     }
     return 0;
 }
@@ -43,6 +66,7 @@ function refresh_options()
     var has_controller = instance_exists(obj_game_controller);
     var has_save = scr_save_exists();
 
+    // ---------- main ----------
     option[0, 0] = has_save ? "Resume" : "Start Game";
     option[0, 1] = "Settings";
 
@@ -56,10 +80,27 @@ function refresh_options()
         option[0, 2] = "Quit Game";
     }
 
+    // ---------- settings ----------
     option[1, 0] = "Graphics Settings";
     option[1, 1] = "Audio Settings";
-    option[1, 2] = "Back";
+    option[1, 2] = "Background Music"; // NEW (subsection)
+    option[1, 3] = "Back";
 
+// ---------- background music page ----------
+	var n = array_length(music_tracks);
+
+	// list songs
+	for (var i = 0; i < n; i++)
+	{
+	    // optional marker for selected song
+	    var marker = (i == global.music_track_index) ? "> " : "  ";
+	    option[4, i] = marker + music_track_names[i];
+	}
+
+	// back item (last)
+	option[4, n] = "Back";
+
+    // settings not loaded yet => show loading placeholders
     if (!has_controller || !variable_global_exists("win_sizes") || !variable_global_exists("win_size_index"))
     {
         option[2, 0] = "Window Size: (loading)";
@@ -74,6 +115,7 @@ function refresh_options()
         return;
     }
 
+    // ---------- graphics ----------
     global.win_size_index = clamp(global.win_size_index, 0, array_length(global.win_sizes) - 1);
     var w = global.win_sizes[global.win_size_index][0];
     var h = global.win_sizes[global.win_size_index][1];
@@ -83,6 +125,7 @@ function refresh_options()
     option[2, 2] = "Brightness: " + string(round((1 - global.brightness) * 100)) + "%";
     option[2, 3] = "Back";
 
+    // ---------- audio ----------
     option[3, 0] = "Master: " + string(round(global.vol_master * 100)) + "%";
     option[3, 1] = "SFX: " + string(round(global.vol_sfx * 100)) + "%";
     option[3, 2] = "Music: " + string(round(global.vol_music * 100)) + "%";

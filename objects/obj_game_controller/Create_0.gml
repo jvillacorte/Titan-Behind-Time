@@ -22,6 +22,9 @@ if (!variable_global_exists("vol_master")) global.vol_master = 1.0;
 if (!variable_global_exists("vol_sfx"))    global.vol_sfx = 1.0;
 if (!variable_global_exists("vol_music"))  global.vol_music = 1.0;
 
+// NEW: persist selected background music track (saved in settings.ini)
+if (!variable_global_exists("music_track_index")) global.music_track_index = 0;
+
 function apply_settings()
 {
     global.win_size_index = clamp(global.win_size_index, 0, array_length(global.win_sizes) - 1);
@@ -30,6 +33,9 @@ function apply_settings()
     global.vol_master = clamp(global.vol_master, 0, 1);
     global.vol_sfx = clamp(global.vol_sfx, 0, 1);
     global.vol_music = clamp(global.vol_music, 0, 1);
+
+    // keep index non-negative integer (final clamp to track-count is done by obj_title_music)
+    global.music_track_index = max(0, floor(global.music_track_index));
 
     window_set_fullscreen(global.fullscreen);
 
@@ -57,6 +63,9 @@ function settings_load()
         global.vol_sfx    = ini_read_real("audio", "sfx", global.vol_sfx);
         global.vol_music  = ini_read_real("audio", "music", global.vol_music);
 
+        // NEW:
+        global.music_track_index = ini_read_real("audio", "music_track_index", global.music_track_index);
+
         ini_close();
     }
 
@@ -74,6 +83,9 @@ function settings_save()
     ini_write_real("audio", "master", global.vol_master);
     ini_write_real("audio", "sfx", global.vol_sfx);
     ini_write_real("audio", "music", global.vol_music);
+
+    // NEW:
+    ini_write_real("audio", "music_track_index", global.music_track_index);
 
     ini_close();
 }
@@ -109,7 +121,7 @@ function save_delete()
     {
         file_delete(global.save_filename);
     }
-	toast_show("Save deleted", 90);
+    toast_show("Save deleted", 90);
 }
 
 // Detect mode by what's in the current room
@@ -170,7 +182,7 @@ function save_game()
 
     ini_close();
 
-    // feedback toast (already suggested)
+    // feedback toast
     toast_show("Game saved", 90);
 }
 
