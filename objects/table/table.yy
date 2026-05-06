@@ -5,6 +5,10 @@
   "managed":true,
   "name":"table",
   "overriddenProperties":[],
+  "parent":{
+    "name":"RPG Assets",
+    "path":"folders/RPG Assets.yy",
+  },
   "parentObjectId":{
     "name":"obj_wall",
     "path":"objects/obj_wall/obj_wall.yy",
