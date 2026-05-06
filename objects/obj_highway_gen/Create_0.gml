@@ -6,7 +6,7 @@ gen_ahead   = 1200;
 keep_behind = 650;
 
 lane_count  = 7;
-lane_w      = 65;
+lane_w      = 60;
 shoulder_w  = 0;
 
 road_total_w = lane_count * lane_w + shoulder_w * 2;

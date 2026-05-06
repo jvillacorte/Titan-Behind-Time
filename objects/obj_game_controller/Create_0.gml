@@ -99,6 +99,9 @@ function pause_set(_paused)
     else audio_resume_all();
 }
 
+// -------------------- key / gate flags --------------------
+if (!variable_global_exists("has_house_key")) global.has_house_key = false;
+
 // -------------------- SAVE SYSTEM --------------------
 global.save_filename = "save.ini";
 
@@ -121,6 +124,9 @@ function save_delete()
     {
         file_delete(global.save_filename);
     }
+
+    global.has_house_key = false;
+
     toast_show("Save deleted", 90);
 }
 
@@ -142,6 +148,9 @@ function save_game()
     ini_write_string("state", "mode", mode);
     ini_write_string("state", "room", room_get_name(room));
 
+    // NEW: save key state(s)
+    ini_write_real("flags", "has_house_key", global.has_house_key ? 1 : 0);
+
     switch (mode)
     {
         case "rpg":
@@ -161,11 +170,9 @@ function save_game()
                 ini_write_real("car", "x", obj_car.x);
                 ini_write_real("car", "y", obj_car.y);
 
-                // save driving state
                 if (variable_instance_exists(obj_car.id, "direction")) ini_write_real("car", "direction", obj_car.direction);
                 if (variable_instance_exists(obj_car.id, "spd"))       ini_write_real("car", "spd", obj_car.spd);
                 if (variable_instance_exists(obj_car.id, "steer_angle")) ini_write_real("car", "steer_angle", obj_car.steer_angle);
-                // optionally save spawn_x/spawn_y if you want persistent spawn
                 if (variable_instance_exists(obj_car.id, "spawn_x")) ini_write_real("car", "spawn_x", obj_car.spawn_x);
                 if (variable_instance_exists(obj_car.id, "spawn_y")) ini_write_real("car", "spawn_y", obj_car.spawn_y);
             }
@@ -182,7 +189,6 @@ function save_game()
 
     ini_close();
 
-    // feedback toast
     toast_show("Game saved", 90);
 }
 
@@ -207,11 +213,13 @@ function load_game()
     var mode = ini_read_string("state", "mode", "rpg");
     var room_name = ini_read_string("state", "room", "rm_bedroom");
 
+    // NEW: load key state(s)
+    global.has_house_key = (ini_read_real("flags", "has_house_key", global.has_house_key ? 1 : 0) == 1);
+
     var sx = 0;
     var sy = 0;
     var sface = 0;
 
-    // clear pending car values
     global.pending_car_direction = undefined;
     global.pending_car_spd       = undefined;
     global.pending_car_steer     = undefined;
@@ -230,7 +238,6 @@ function load_game()
             sx = ini_read_real("car", "x", 0);
             sy = ini_read_real("car", "y", 0);
 
-            // read optional car values as strings and parse if present
             var tmp = ini_read_string("car", "direction", "");
             if (tmp != "") global.pending_car_direction = real(tmp);
 
@@ -281,6 +288,9 @@ global.new_game = false;
 function start_new_game()
 {
     global.new_game = true;
+	
+    global.has_house_key = false;
+
     room_goto(rm_bedroom);
 }
 
